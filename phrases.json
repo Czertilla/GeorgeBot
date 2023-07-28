@@ -307,6 +307,10 @@
         "en": "✅ Select: <date>",
         "ru": "✅ Выбрать: <date>"
     },
+    "select_date": {
+        "en": "🗓 Select a date",
+        "ru": "🗓 Выбрать дату"
+    },
     "system_language": {
         "en": "🛠 As in the system",
         "ru": "🛠 Как в системе"
