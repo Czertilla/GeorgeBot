@@ -20,13 +20,16 @@ class Scheduler:
     
     @exc.protect
     def schedule(self):
-        while self.lock:
-            pass
         if self.closing:
             return
+        while self.lock:
+            if self.closing:
+                return
         self.lock = True
-        for key, val in self.timers.items():
+        for key in self.timers.copy():
+            val = self.timers.get(key)
             val.cancel()
+            val.join()
         self.lock = False
         self.timers = {}
         for ID in self.timetable.search():
@@ -46,7 +49,7 @@ class Scheduler:
                 func = self.bot.spam
                 text = f"""Это тестовая рассылка по расписанию
 <code>проверка парсинга, этот текст должен копироваться по нажатию</code>
-<i>ID события: {event_id}
+<i>ID события: ({code[-1]}){event_id}
 Частота рассылки:{regularity}
 За исключением {exceptions}
 следующая дата рассылки {scion}</i>"""
@@ -55,7 +58,8 @@ class Scheduler:
             case "advertisement":
                 func = self.bot.advert()
             case "unban":
-                func = self.bot.unban()
+                func = self.bot.unban
+                args += [code[1]]
             case "wait4":
                 target = code[1]
                 func = self.set_event_data
@@ -67,18 +71,19 @@ class Scheduler:
     
     @exc.protect
     def add_timer(self, event_id, ignore_past=False):
-        while self.lock:
-            pass
         if self.closing:
             return
+        while self.lock:
+            if self.closing:
+                return
         event_data = self.timetable.fetch(event_id, autodecode=None, ignore_nulls=True)
         time = event_data.get('time')
         if time == '~' or event_data.get('done', 0) or not event_data.get('active', 1):
             return
-        regularity = json.loads(event_data.get('regularity', "{}".encode()))
+        regularity = event_data.get('regularity')
         exceptions = json.loads(event_data.get('exceptions', "[]".encode()))
         if regularity:
-            delta = datetime.timedelta(**regularity)
+            delta = datetime.timedelta(seconds=regularity)
             scion = datetime.datetime.strptime(time, "%Y-%m-%d %H:%M:%S") + delta
             checklist = [lambda scion: scion.strftime("%Y-%m-%d %H:%M:%S") < clock.now()]
             for exception in exceptions:
@@ -124,6 +129,7 @@ class Scheduler:
             event = self.timetable.fetch(event_id)
             if event.get('active') and not event.get('done'):
                 func(*args, **kwargs)
+                logger.debug(f"event {event_id} completed")
             self.set_event_data(event_id, "complete")
             timer:threading.Timer = self.timers.pop(event_id)
             if scion:
@@ -159,16 +165,17 @@ class Scheduler:
         return event_id
 
     def close(self):
+        self.lock = True
         self.closing = True
-        for key, timer in self.timers.items():
+        clock.wait()
+        for key in self.timers.copy():
+            timer:threading.Timer = self.timers.get(key)
             try:
                 timer.cancel()
                 timer.join()
                 logger.debug(f"|\t|\t{key} timer closed")
             except:
                 logger.error(f"|\t|\t{key} timer wasn`t close")
-
-
         
         
 

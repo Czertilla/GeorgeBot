@@ -6,6 +6,11 @@ from try_int import try_int
 from last_mday import get_last_mday
 
 logger = logging.getLogger(__name__)
+
+def timedelta(*args, **kwargs):
+    keys = ('days', 'seconds', 'microseconds','milliseconds', 'minutes', 'hours', 'weeks')
+    return datetime.timedelta(*args, **{key: kwargs.get(key, 0) for key in keys})
+
 def now(*modifiers:str, dict_like:bool=False):
     moment = datetime.datetime.now()
     for modifier in modifiers:
@@ -16,6 +21,8 @@ def now(*modifiers:str, dict_like:bool=False):
 
 def _modify(moment:datetime.datetime, modifier:str) -> datetime.datetime:
     modifier = modifier.replace(' ', '')
+    if moment is None:
+        return _get_modifier(modifier[1:], sensitivity=True)
     match modifier[0]:
         case '+':
             return moment + _get_modifier(modifier[1:])
@@ -24,8 +31,7 @@ def _modify(moment:datetime.datetime, modifier:str) -> datetime.datetime:
         case _:
             return moment
     
-
-def _get_modifier(modifier:str) -> datetime.timedelta:
+def _get_modifier(modifier:str, sensitivity=False) -> datetime.timedelta:
     num = ''
     while modifier[0].isdigit():
         num += modifier[0]
@@ -42,9 +48,22 @@ def _get_modifier(modifier:str) -> datetime.timedelta:
             return datetime.timedelta(minutes=num)
         case 'sec' | 'secs'| 'second' | 'seconds' | 'S' | 's':
             return datetime.timedelta(seconds=num)
-        case 'week' | 'weeks' | 'w' | 'W':
+        case 'week' | 'weeks' | 'w' | 'W': 
             return datetime.timedelta(weeks=num)
+    if sensitivity:
+        return 
     return datetime.timedelta()
+
+
+def get_datetime(line)-> datetime.datetime|None:
+    try:
+        return datetime.datetime.strptime(line, "%Y-%m-%d %H:%M:%S")
+    except:
+        logger.warning(f"invalid date_string_format: {line} -> %Y-%m-%d %H:%M:%S")
+        return None
+    
+def get_dateline(date:datetime.datetime) -> str:
+    return date.strftime("%Y-%m-%d %H:%M:%S")
 
 
 def package(moment:str|datetime.datetime, gradation:str='', ignore_nulls:bool=False) -> dict:

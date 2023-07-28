@@ -90,9 +90,33 @@
         "en": "◀️ Go Back: <where>",
         "ru": "◀️ Вернуться: <where>"
     },
+    "ban_notification": {
+        "en": "Your profile has been banned for the following reason: <reason>\nUnban: <date>\n<i> Most of the bot's features are not available to you for the duration of your ban. If you have any questions, please contact support.</i>",
+        "ru": "Ваш профиль был заблокирован по причине: <reason>\nРазбан: <date>\n<i>На срок бана вам не доступны большинство функций бота. По вопросам обращайтесь в поддержку.</i>"
+    },
+    "unban_notification": {
+        "en": "You been unbanned",
+        "ru": "Ваш профиль разблоуирован"
+    },
     "become_master": {
         "en": "📇 Become a master",
         "ru": "📇 Стать мастером"
+    },
+    "br-abusive_behavior": {
+        "en": "abusive_behavior (profanity, disrespectful attitude, pornography)",
+        "ru": "оскорбительное поведение (ненормативная лексика, неуважительное отношение, порнография)"
+    },
+    "br-bug_exploits": {
+        "en": "Use of technical vulnerabilities (DDOS attacks, spam, flooding, exploits)",
+        "ru": "Использование технических уязвимостей (ДДОС атаки, спам, флуд, эксплоиты)"
+    },
+    "br-financial_fraud": {
+        "en": "Financial fraud (false payment schemes, extortion, attempted fraud and/or third-party master contracting)",
+        "ru": "финансовое мошенничество (схемы с ложной оплатой, вымогательство, попытка обмана и/или стороннего договора с мастером)"
+    },
+    "br-other": {
+        "en": "some other reasons (contact support for clarification)",
+        "ru": "Иная причина (обратитесь в поддержку для разъяснений)"
     },
     "cancel_deletion": {
         "en": "🛑 Сancel deletion 🛑",
@@ -107,8 +131,8 @@
         "ru": "⚠️⚠️⚠️Вы подтверждаете, что хотите удалить все эти файлы?"
     },
     "deadline_menu_desc": {
-        "en": "Set a deadline date. If you see a pattern instead of part of the date, the deadline is considered more inaccurate. You can also write the date manually using this template",
-        "ru": "Выставите дату дедлайна. Если вместо части даты вы видите шаблон, дедлайн считается более неточным. Также вы можете написать дату вручную по данному шаблону"
+        "en": "Set a deadline date. If you see a pattern instead of part of the date, the deadline is considered more inaccurate. You can also write the date manually using this template.\n'99' denotes an unspecified part of the date, the deadline counts as 'until the end of this period (day, hour, etc.)'",
+        "ru": "Выставите дату дедлайна. Если вместо части даты вы видите шаблон, дедлайн считается более неточным. Также вы можете написать дату вручную по данному шаблону.\n'99' обозначают неустановленную часть даты, дедлайн считается, как 'до конца этого периода (дня, часа и тд)'"
     },
     "deadline_of_order": {
         "en": "⌛️ Deadline for your order: <curr>",
@@ -239,6 +263,10 @@
         "en": "🪪 Your master's card",
         "ru": "🪪 Визитка вашего мастера"
     },
+    "permanent": {
+        "en": "permanent period",
+        "ru": "бессрочный период"
+    },
     "now_selected": {
         "en": "Now selected",
         "ru": "Сейчас выбрано"
@@ -266,10 +294,18 @@
     "clear_selection": {
         "en": "☑️ Deselect all",
         "ru": "☑️ Сбросить выбор"
-    },  
+    }, 
+    "invalid_date": {
+        "en": "Sorry, you can't select this date/time((",
+        "ru": "Простите, Вы не можете выбрать эту дату/время(("
+    },
     "switch": {
         "en": "✅ The changes are now in effect:",
         "ru": "✅ Изменения вступили в силу"
+    },
+    "select_datetime": {
+        "en": "✅ Select: <date>",
+        "ru": "✅ Выбрать: <date>"
     },
     "system_language": {
         "en": "🛠 As in the system",

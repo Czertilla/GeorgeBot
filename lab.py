@@ -4,10 +4,12 @@ import threading
 import logging
 """27.6.2023 7:36:42"""
 import time
-from Gbot import GeorgeBot
+from set_logging import LOGGING
+# from Gbot import GeorgeBot
 from base import Base
 import clock
 import datetime
+import re
 
 orders = Base('o')
 users = Base('u')
@@ -15,22 +17,28 @@ files = Base('f')
 events = Base('e')
 
 import logging
-from tqdm import trange
-from tqdm.contrib.logging import logging_redirect_tqdm
+# from tqdm import trange
+# from tqdm.contrib.logging import logging_redirect_tqdm
 
-LOG = logging.getLogger(__name__)
+# LOG = logging.getLogger(__name__)
 
-if __name__ == '__main__':
-    logging.basicConfig(level=10, format="%(asctime)s %(levelname)s:%(name)s:%(lineno)s> %(message)s",datefmt="%Y-%m-%d %H:%M:%S")
-    with logging_redirect_tqdm():
-        for i in trange(9):
-            if i == 4:
-                LOG.info("console logging redirected to `tqdm.write()`")
+# if __name__ == '__main__':
+#     logging.basicConfig(level=10, format="%(asctime)s %(levelname)s:%(name)s:%(lineno)s> %(message)s",datefmt="%Y-%m-%d %H:%M:%S")
+#     with logging_redirect_tqdm():
+#         for i in trange(9):
+#             if i == 4:
+#                 LOG.info("console logging redirected to `tqdm.write()`")
     # logging restored
 
 # logging.basicConfig(level=logging.INFO,
 #                     format='(%(threadName)-10s) %(message)s',
 #                     )
+import logging.config
+
+logging.config.dictConfig(LOGGING)
+log = logging.getLogger(__name__)
+
+print(re.findall(r'[^#]*(?=#)', 'ban_menu#627784637#abusive_behavior'))
 
 # def daemon():
 #     logging.debug('Starting')

@@ -293,7 +293,12 @@ performed on all columns
         ID = str(uuid.uuid4())
         while self.verify(ID):
             ID = str(uuid.uuid4())
+        regularity = event.get('regularity')
+        if type(regularity) is dict:
+            regularity = clock.timedelta(**regularity).total_seconds()
+        regularity = clock.try_int(regularity)
         event.update({"id": ID,
+                      "regularity": regularity,
                       "time": event.get('time', '~'),
                       "code": event.get('code', 'test'),
                       "daemon": event.get('dayemon', 0),

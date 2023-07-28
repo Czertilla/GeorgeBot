@@ -37,38 +37,104 @@ class GeorgeBot(telebot.TeleBot):
         self.orders_data: Base = o_d
         self.months = ['month', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
         self.weekdays = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
+    
 
-    def access(self, func: "function", access_lvl:int=0) -> "function":
-        def protected(*args, **kwargs):
-            message = args[0]
-            user = self.get_user(message)
-            status_list = ["banned","newcomer", "simple", "premium", "master", "foreman", "god"]
-            status = user["status"]
-            if status in status_list:
-                if status_list.index(status) <= access_lvl:
-                    self.display(user, "access_denial")
-                else:
+    def access(self, access_lvl:int=0, /, page_type:str=None, shadow=False):
+        if page_type != None:
+            access_lvl = 4
+        def decorator(func):
+            def protected(*args, **kwargs):
+                message: telebot.types.Message|telebot.types.CallbackQuery
+                message = args[0]
+                user = self.get_user(message)
+                # status_list = ["unknow", "banned", "newcomer", "simple", "premium", "master", "admin", "foreman", "god"]
+                status = user.get("status")
+                match status:
+                    case "unknow" | "banned":
+                        lvl = -1
+                    case "newcomer":
+                        lvl = 0
+                    case "simple":
+                        lvl = 1
+                    case "premium":
+                        lvl = 4
+                    case "master":
+                        lvl = 5
+                    case "admin" | "foreman":
+                        lvl = 8
+                    case "god":
+                        lvl = 100
+                    case _:
+                        return
+                denied = False
+                if lvl >= access_lvl:
                     return func(*args, **kwargs)
-            elif access_lvl == 0:
-                return func(*args, **kwargs)   
-        return protected
+                match type(message):
+                    case telebot.types.Message:
+                        text = message.text
+                        sep = ' '
+                    case telebot.types.CallbackQuery:
+                        text = message.data
+                        sep = '#'
+                if page_type is not None:
+                    try:
+                        page_id = text.split('#')[1]
+                    except:
+                        logger.error("Access technical denial: no page id")
+                    try:
+                        ID = user.get('id')
+                    except:
+                        logger.error("Access technical denial: no user id")
+                    match page_type:
+                        case "show_order":
+                            order = self.orders_data.fetch(page_id)
+                            if ID in (order.get('master'), order.get('customer')):
+                                return func(*args, **kwargs)
+                        case "edit_order":
+                            order = self.orders_data.fetch(page_id)
+                            if ID == order.get('customer'):
+                                return func(*args, **kwargs)
+                        case "perform_order":
+                            order = self.orders_data.fetch(page_id)
+                            if ID == order.get('master'):
+                                return func(*args, **kwargs)
+                if shadow:
+                    return
+                self.display(user, "access_denial")
+            return protected
+        return decorator
 
     def available_hours(self, user:dict) -> list:
         note = user.get("note")
         match note:
+            case "deadline":
+                year, month, day = [user.get(key) for key in ('year', 'month', 'day')]
+                limit = clock.now('+1hour')
+                answer = []
+                for h in range(24):
+                    if f"{year}-{month:02}-{day:02} {h:02}:59:59" > limit:
+                        answer.append(h)
+                return answer
             case _:
                 return [h for h in range(24)]
     
     def available_minutes(self, user:dict) -> list:
         note = user.get("note")
         match note:
+            case "deadline":
+                year, month, day, hour = [user.get(key) for key in ('year', 'month', 'day', 'hour')]
+                limit = clock.now('+1hour')
+                answer = []
+                for m in range(60):
+                    if f"{year}-{month:02}-{day:02} {hour:02}:{m:02}:59" > limit:
+                        answer.append(m)
+                return answer
             case _:
-                return [h for h in range(24)]
+                return [m for m in range(60)]
 
 
     @exc.protect
     def display(self, user: dict, code: str) -> None|telebot.types.InlineKeyboardButton|telebot.types.Message:
-        1/0
         button = telebot.types.InlineKeyboardButton
         menu = telebot.types.InlineKeyboardMarkup()
         ID = user.get('id')
@@ -90,6 +156,15 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(self.display(user, 'back'))
                 menu.add(self.display(user, 'back_to_home'))
                 self.send_message(ID, tell("access_denial", lang, {'status': user['status']}), reply_markup=menu, parse_mode="HTML")
+            case "ban_menu"|"report_menu":
+                m = code.split('_')[0]
+                target = user.get('ban_target')
+                menu.add(button(tell("br-abusive_behavior", lang), callback_data=f'{m}#{target}#abusive_behavior'))
+                menu.add(button(tell("br-bug_exploits", lang), callback_data=f'{m}#{target}#bug_exploits'))
+                menu.add(button(tell('br-financial_fraud', lang), callback_data=f'{m}#{target}#financial_fraud'))
+                menu.add(button(tell('br-other', lang), callback_data=f"{m}#{target}#other"))
+                menu.add(self.display(user, "back"))
+                self.send_message(ID, text="set_ban_reason", reply_markup=menu)
             case "calendary_years":
                 windth = 8
                 timeline = user.get('timeline')
@@ -114,6 +189,8 @@ class GeorgeBot(telebot.TeleBot):
                 ])
                 menu.add(*[button(tell(self.months[month], lang), callback_data=f"calendary#{year}-{month}#{note}") \
                            for month in range(1, 13)])
+                date = f'{year}-99-99 99:99'
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -167,7 +244,7 @@ class GeorgeBot(telebot.TeleBot):
                             day = f':{day}:'
                         if dig_day == selected.get("day"):
                             day = f"\\{day}/"
-                        row.append(button(day, callback_data=f"calendary#{year}-{month}#{note}"))
+                        row.append(button(day, callback_data=f"calendary#{year}-{month}-{dig_day}#{note}"))
                         # row.append(button(day, callback_data=f"calendary#{year}-{month}-{day}"))
                     else:
                         row.append(button(text='<', callback_data=topbar[0].callback_data))
@@ -175,11 +252,106 @@ class GeorgeBot(telebot.TeleBot):
                 if 0 < weekday < 7:
                     row += [button(text='>', callback_data=topbar[-1].callback_data)]*(7-weekday) 
                 menu.add(*row)
+                date = f'{year:02}-{month:02}-99 99:99'
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), 
+                                callback_data=f"deadline#{order_id}#{date}"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
                     self.edit_message_reply_markup(ID, msg_id, reply_markup=menu)
                 except:
+                    self.send_message(ID, f"{year}", reply_markup=menu)
+            case "calendary_hours":
+                timeline = user.get('timeline')
+                def set_hour(h):
+                    if h in timeline:
+                        return button(f"{h:02}: - -", callback_data=f"calendary#{year}-{month}-{day} {h}#{note}")
+                    return button(f"XX:XX", callback_data=f"X")
+                menu = telebot.types.InlineKeyboardMarkup(row_width=6)
+                year, month, day = user.get("year"), user.get('month'), user.get('day')
+                menu.add(button(f"{year}", callback_data=f"calendary##{note}"),
+                         button(f"{tell(self.months[month], lang)}", callback_data=f"calendary#{year}#{note}"),
+                         button(f"{day}", callback_data=f"calendary#{year}-{month}#{note}"))
+                for line in range(4):
+                    menu.add(*
+                        [set_hour(hour) for hour in range(line*6, line*6+6)])
+                date = f'{year}-{month:02}-{day:02} 99:99'
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
+                try:
+                    msg_id = user.get("msg_id", 0)
+                    self.edit_message_reply_markup(ID, msg_id, reply_markup=menu)
+                except:    
+                    exc.tracebacking()
+                    self.send_message(ID, f"{year}", reply_markup=menu)
+            case "calendary_minutes":
+                timeline = user.get('timeline')
+                def set_minute(m):
+                    if m in timeline:
+                        return button(f"{hour:02}:{m:02}", callback_data=f"calendary#{year}-{month}-{day} {hour}:{m}#{note}")
+                    return button(f"XX:XX", callback_data=f"X")
+                menu = telebot.types.InlineKeyboardMarkup(row_width=6)
+                year, month, day, hour = [user.get(key) for key in ('year', 'month', 'day', 'hour')]
+                menu.add(button(f"{year}", callback_data=f"calendary##{note}"),
+                         button(f"{tell(self.months[month], lang)}", callback_data=f"calendary#{year}#{note}"),
+                         button(f"{day}", callback_data=f"calendary#{year}-{month}#{note}"),
+                         button(f"{hour}: - -", callback_data=f"calendary#{year}-{month}-{day}#{note}"))
+                for line in range(10):
+                    menu.add(*
+                        [set_minute(minute) for minute in range(line*6, line*6+6)])
+                date = f'{year}-{month:02}-{day:02} {hour:02}:99'
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
+                try:
+                    msg_id = user.get("msg_id", 0)
+                    self.edit_message_reply_markup(ID, msg_id, reply_markup=menu)
+                except:    
+                    exc.tracebacking()
+                    self.send_message(ID, f"{year}", reply_markup=menu)
+            case "calendary_finaly":
+                menu = telebot.types.InlineKeyboardMarkup(row_width=5)
+                year, month, day, hour, minute = [user.get(key) for key in ('year', 'month', 'day', 'hour', 'minute')]
+
+                date_time = clock.get_datetime(f"{year}-{month:02}-{day:02} {hour:02}:{minute:02}:00")
+                upMonth = f"calendary#{year}-{month+1}-{day} {hour}:{minute}#{note}"
+                dwMonth = f"calendary#{year}-{month-1}-{day} {hour}:{minute}#{note}"
+                match month:
+                    case 12:
+                        upMonth = f"calendary#{year+1}-{1}-{day} {hour}:{minute}#{note}"
+                    case 1:
+                        dwMonth = f"calendary#{year-1}-{12}-{day} {hour}:{minute}#{note}"
+                upDay = f"calendary#{clock.get_dateline(date_time+clock.datetime.timedelta(days=1))[:-3]}#{note}"
+                dwDay = f"calendary#{clock.get_dateline(date_time-clock.datetime.timedelta(days=1))[:-3]}#{note}"
+                upHour = f"calendary#{clock.get_dateline(date_time+clock.datetime.timedelta(hours=1))[:-3]}#{note}"
+                dwHour = f"calendary#{clock.get_dateline(date_time-clock.datetime.timedelta(hours=1))[:-3]}#{note}"
+                upMin = f"calendary#{clock.get_dateline(date_time+clock.datetime.timedelta(minutes=1))[:-3]}#{note}"
+                dwMin = f"calendary#{clock.get_dateline(date_time-clock.datetime.timedelta(minutes=1))[:-3]}#{note}"
+                menu.add(button(f"🔼", callback_data=f"calendary#{hour+1}#{note}"),
+                         button(f"🔼", callback_data=upMonth),
+                         button(f"🔼", callback_data=upDay),
+                         button(f"🔼", callback_data=upHour),
+                         button(f"🔼", callback_data=upMin)
+                         )
+                menu.add(button(f"{year}", callback_data=f"calendary##{note}"),
+                         button(f"{tell(self.months[month], lang)}", callback_data=f"calendary#{year}#{note}"),
+                         button(f"{day:02}", callback_data=f"calendary#{year}-{month}#{note}"),
+                         button(f"{hour:02}", callback_data=f"calendary#{year}-{month}-{day}#{note}"),
+                         button(f":{minute:02}", callback_data=f"calendary#{year}-{month}-{day} {hour}#{note}")
+                         )
+                menu.add(button(f"🔽", callback_data=f"calendary#{hour-1}#{note}"),
+                         button(f"🔽", callback_data=dwMonth),
+                         button(f"🔽", callback_data=dwDay),
+                         button(f"🔽", callback_data=dwHour),
+                         button(f"🔽", callback_data=dwMin)
+                         )
+                date = f'{year}-{month:02}-{day:02} {hour:02}:{minute:02}'
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
+                try:
+                    msg_id = user.get("msg_id", 0)
+                    self.edit_message_reply_markup(ID, msg_id, reply_markup=menu)
+                except:    
+                    exc.tracebacking()
                     self.send_message(ID, f"{year}", reply_markup=menu)
             case "confirm_del_files":
                 menu.add(button(tell("cancel_deletion", lang), callback_data="confirm cancel"))
@@ -364,6 +536,8 @@ class GeorgeBot(telebot.TeleBot):
                 self.send_message(ID, tell("switch", lang), reply_markup=menu)
             case "back_to_home":
                 return button("◀️🏛", callback_data="to main_menu")
+            case "invalid_date":
+                return tell('invalid_date', lang)
             case "back":
                 path: list = user['nav'].split('/')
                 if len(path) == 1:
@@ -462,17 +636,28 @@ class GeorgeBot(telebot.TeleBot):
             pass
 
 
-    def text_handler(self, message:telebot.types.Message, user: dict, path_end: str) -> None:
+    def text_handler(self, message:telebot.types.Message, user: dict, path_end: str):
         if path_end == 'del_profile' and message.text == str(user['id']):
             logger.info(f"{self.users_data.discard_profile(user['id'])}")
             del user
             del message
             return
         id_list = list(map(try_int, re.findall(r'(?<=#)\d*', path_end)))
-        location = (re.findall(r'.*(?=#)')+[None])[0]
+        location = (re.findall(r'^[^#]*(?=#)', path_end)+[None])[0]
         if location is None:
             return
         match location:
+            case 'ban_menu':
+                target_id, br = path_end.split('#')[1:]
+                ID = int(target_id)
+                text = re.sub(r'@[^ ]*(?= )', '+', message.text)
+                if not '+' in text:
+                    text = '+' + text
+                if clock._modify(None, text) is None:
+                    return
+                self.set_nav('main_menu', user, type(message))
+                term = clock.now(text)
+                return ['ban', ID, term, br]
             case 'edit_deadline_menu':
                 order_id = id_list[0]
                 if order_id is None:
@@ -490,8 +675,22 @@ class GeorgeBot(telebot.TeleBot):
                         dl = f"{year+1:04}-{month:02}-{day:02} {hour:02}:{minute:02}:{second:02}"
                 else: 
                     dl = f"{year:04}-{month:02}-{day:02} {hour:02}:{minute:02}:{second:02}"
+                if dl < clock.now('+1hour'):
+                    return
                 request = {"deadline": dl}
+                lang = user.get('language_code')
+                chat_id, msg_id = (id_list[-2:] + [None]*2)[:2]
                 self.orders_data.update_order(order_id, request)
+                try:
+                    self.delete_message(chat_id, msg_id)
+                    message = self.display(user, "edit_deadline_menu")
+                    nav:str = user.get('nav')
+                    sharp_list = nav.split('#')
+                    nav = '#'.join(sharp_list[:-2]+[f"{message.chat.id}", f"{message.id}"])
+                    self.set_nav(nav, user, type(message))
+                except:
+                    logger.warning(f"set date witout edit message text ({chat_id=}, {msg_id=})")
+                    exc.tracebacking()
                 return
             case 'enter+description':
                 splited = path_end.split('+')
@@ -515,22 +714,29 @@ class GeorgeBot(telebot.TeleBot):
     
 
     @exc.protect
-    def ban(self, ID, date:str='~', ban_reason='other'):
+    def ban(self, ID, date:str='~', ban_reason='br-other'):
         user = self.users_data.fetch(ID)
         lang = user.get('lang')
         request = {"status": "banned", "_unban_date": date}
+        if date == '~':
+            date = tell("pemanent", lang)
         self.users_data.update_profile(ID, request)
-        # if 
         self.send_message(ID, tell("ban_notification", inset={'reason': tell(ban_reason, lang), 'date': date}))
+    
+    @exc.protect
+    def unban(self, ID):
+        user = self.users_data.fetch(ID)
+        lang = user.get('lang')
+        request = {'status': 'simple', '_unban_date': None}
+        self.users_data.update_profile(ID, request)
+        self.send_message(user.get('id'),tell("unban_notification"))
 
     @exc.protect
     def spam(self, text, parse_mode):
-        logger.info(f"spam {f'{text=}':20s}, {parse_mode=}"[:100])
         for ID in self.users_data.search():
             user = self.users_data.fetch(ID)
             if user.get('status') != 'god':
                 continue
-            logger.info(f"\t{ID}")
             self.send_message(ID, text, parse_mode)
 
 
