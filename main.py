@@ -10,6 +10,7 @@ from schedule import Scheduler
 from exceptor import Exceptor
 from available_days import available_days
 from Gbot import exc
+from get_version import get_version
 import logging.config
 import splitter
 import pickle
@@ -88,7 +89,7 @@ class Admin:
     def close(self, *threads) -> None:
         logger.info("closing process:")
         if not threads or threads == 'all':
-            threads = self.threads.copy().keys()
+            threads = self.threads.copy()
             self.complete = True
         for thr in threads:
             logger.info(f"|\tthread {thr}:")
@@ -118,7 +119,7 @@ class Admin:
     @exc.protect
     def dir(self):
         var_dict = vars(self)
-        def convert (val):
+        def convert(val):
             try: 
                 json.dumps(val)
             except:
@@ -231,8 +232,8 @@ class Admin:
             threads = ['m', 's']
         for thr in threads:
             try:
-                if getattr(self, 'bot', None) is None and 'm' in threads or 's' in threads:
-                    self.bot = GeorgeBot(getattr(self, 'token'), self.users_data, self.orders_data)
+                # if getattr(self, 'bot', None) is None and 'm' in threads or 's' in threads:
+                #     self.bot = GeorgeBot(getattr(self, 'token'), self.users_data, self.orders_data)
                 if getattr(self, 'scheduler', None) is None and 's' in threads:
                     self.scheduler = Scheduler(self.bot)
                 arguments = self.thr_presets.get(thr)
@@ -426,7 +427,8 @@ class Admin:
                     edit_type(call)
                 case _:
                     unknow_destination(call)
-        
+       
+
         @bot.callback_query_handler(func=lambda call: call.data[:9] == "calendary")
         def calendary(call: telebot.types.CallbackQuery):
             user:dict = bot.get_user(call)
@@ -820,8 +822,8 @@ class Admin:
                     case 'ban':
                         self._ban_profile(trg, term, desc)
                         bot.send_message(user.get('id'), 'user banned')
-
         try:
+            logger.debug("polling right now")
             bot.polling(none_stop=True, interval=0)
         except Exception as e:
             logger.error(f'bot polling will stoped by Fatal Error: \n\t{e}')
@@ -847,7 +849,8 @@ if __name__ == "__main__":
     # logging.basicConfig(format="%(asctime)s %(levelname)s:%(name)s:%(lineno)s> %(message)s",datefmt="%Y-%m-%d %H:%M:%S")
     from set_logging import config
     config()
-    logger.info("====================== session started =======================")
+    ver = get_version()
+    logger.info(f"{f'{ver:10s}'.replace(' ', '=')}============ session started =======================")
     admin = Admin()
     for command in sys.stdin:
         admin._command_exec(command)

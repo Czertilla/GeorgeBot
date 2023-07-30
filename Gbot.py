@@ -27,8 +27,6 @@ def uknw(func):
     return protected
 
 
-
-
 class GeorgeBot(telebot.TeleBot):
     def __init__(self, token, u_d, o_d):
         telebot.TeleBot.__init__(self, token)
@@ -190,7 +188,7 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(*[button(tell(self.months[month], lang), callback_data=f"calendary#{year}-{month}#{note}") \
                            for month in range(1, 13)])
                 date = f'{year}-99-99 99:99'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -254,7 +252,7 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(*row)
                 date = f'{year:02}-{month:02}-99 99:99'
                 menu.add(button(tell("select_datetime", lang, inset={'date': date}), 
-                                callback_data=f"deadline#{order_id}#{date}"))
+                                callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -276,7 +274,7 @@ class GeorgeBot(telebot.TeleBot):
                     menu.add(*
                         [set_hour(hour) for hour in range(line*6, line*6+6)])
                 date = f'{year}-{month:02}-{day:02} 99:99'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -300,7 +298,7 @@ class GeorgeBot(telebot.TeleBot):
                     menu.add(*
                         [set_minute(minute) for minute in range(line*6, line*6+6)])
                 date = f'{year}-{month:02}-{day:02} {hour:02}:99'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -326,7 +324,7 @@ class GeorgeBot(telebot.TeleBot):
                 dwHour = f"calendary#{clock.get_dateline(date_time-clock.datetime.timedelta(hours=1))[:-3]}#{note}"
                 upMin = f"calendary#{clock.get_dateline(date_time+clock.datetime.timedelta(minutes=1))[:-3]}#{note}"
                 dwMin = f"calendary#{clock.get_dateline(date_time-clock.datetime.timedelta(minutes=1))[:-3]}#{note}"
-                menu.add(button(f"🔼", callback_data=f"calendary#{hour+1}#{note}"),
+                menu.add(button(f"🔼", callback_data=f"calendary#{year+1}-{month}-{day} {hour}:{minute}#{note}"),
                          button(f"🔼", callback_data=upMonth),
                          button(f"🔼", callback_data=upDay),
                          button(f"🔼", callback_data=upHour),
@@ -338,19 +336,19 @@ class GeorgeBot(telebot.TeleBot):
                          button(f"{hour:02}", callback_data=f"calendary#{year}-{month}-{day}#{note}"),
                          button(f":{minute:02}", callback_data=f"calendary#{year}-{month}-{day} {hour}#{note}")
                          )
-                menu.add(button(f"🔽", callback_data=f"calendary#{hour-1}#{note}"),
+                menu.add(button(f"🔽", callback_data=f"calendary#{year-1}-{month}-{day} {hour}:{minute}#{note}"),
                          button(f"🔽", callback_data=dwMonth),
                          button(f"🔽", callback_data=dwDay),
                          button(f"🔽", callback_data=dwHour),
                          button(f"🔽", callback_data=dwMin)
                          )
                 date = f'{year}-{month:02}-{day:02} {hour:02}:{minute:02}'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
                     self.edit_message_reply_markup(ID, msg_id, reply_markup=menu)
-                except:    
+                except:     
                     exc.tracebacking()
                     self.send_message(ID, f"{year}", reply_markup=menu)
             case "confirm_del_files":
@@ -388,11 +386,11 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(button(tell("enter", lang), callback_data=f"enter description {order_id}"))
                 menu.add(button(tell("clear", lang), callback_data=f"del description {order_id}"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
-                desc = order["description"]
+                desc = order["description"][:3500]
                 if not desc:
                     desc = tell("description_desc", lang)
                 else:
-                    desc = f'<code>{desc}</code>'+'\n<i>'+tell('description_disc', lang)+'</i>'
+                    desc = f"<code>{desc}</code>\n<i>({len(desc)}/3500)\n{tell('description_disc', lang)}</i>"
                 text = f"{tell('description_of_order', lang, {'curr': desc})}"
                 self.send_message(ID, text, reply_markup=menu, parse_mode='HTML')
             case "edit_order_menu":
@@ -706,7 +704,7 @@ class GeorgeBot(telebot.TeleBot):
                     message_id = message.id - 1
                 match obj:
                     case "description":
-                        request = {'description': message.text}
+                        request = {'description': message.text[:3500]}
                         func = self.orders_data.update_order
         func(ID, request)
         self.delete_message(chat_id, message_id)
