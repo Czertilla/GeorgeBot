@@ -1,4 +1,4 @@
-from base import Base
+from base import Events
 import threading
 import datetime
 import clock
@@ -14,7 +14,7 @@ class Scheduler:
     def __init__(self, bot:GeorgeBot) -> None:
         self.lock = False
         self.closing = False
-        self.timetable = Base('e')
+        self.timetable:Events = Events()
         self.timers = {}
         self.bot = bot
     
@@ -32,7 +32,7 @@ class Scheduler:
             val.join()
         self.lock = False
         self.timers = {}
-        for ID in self.timetable.search():
+        for ID in self.timetable.search(1, ('active',)).get('whole').get(''):
             self.add_timer(ID)
     
     @exc.protect
@@ -76,12 +76,16 @@ class Scheduler:
         while self.lock:
             if self.closing:
                 return
-        event_data = self.timetable.fetch(event_id, autodecode=None, ignore_nulls=True)
+        event_data:dict = self.timetable.fetch(event_id)
         time = event_data.get('time')
-        if time == '~' or event_data.get('done', 0) or not event_data.get('active', 1):
+        done = event_data.get('done', 0)
+        active = event_data.get('active', 1)
+        if time == '~' or done or not active:
+            if done and not event_data.get('regularity', False):
+                self.timetable.update_event(event_id, {"active": 0})
             return
         regularity = event_data.get('regularity')
-        exceptions = json.loads(event_data.get('exceptions', "[]".encode()))
+        exceptions = event_data.get('exceptions')
         if regularity:
             delta = datetime.timedelta(seconds=regularity)
             scion = datetime.datetime.strptime(time, "%Y-%m-%d %H:%M:%S") + delta
@@ -182,7 +186,8 @@ class Scheduler:
 if __name__ == "__main__":
     with open("bot_presets.json", 'rb') as f:
         token = json.load(f).get('token')
-    bot = GeorgeBot(token, Base('u'), Base('o'))
+    from base import Profiles, Orders
+    bot = GeorgeBot(token, Profiles(), Orders())
     timetable = Scheduler(bot)
     timetable.schedule()
     event = {'code': "test", 'time': "2023-07-24 20:15:23"}

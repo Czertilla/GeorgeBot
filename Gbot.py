@@ -1,6 +1,6 @@
 import logging
 import telebot
-from base import Base
+from base import Profiles, Orders, Files 
 from exceptor import Exceptor
 from phrases import tell
 from phrases import language_codes
@@ -28,11 +28,11 @@ def uknw(func):
 
 
 class GeorgeBot(telebot.TeleBot):
-    def __init__(self, token, u_d, o_d):
+    def __init__(self, token, u_d:Profiles, o_d:Orders):
         telebot.TeleBot.__init__(self, token)
-        self.files_data = Base('f')
-        self.users_data: Base = u_d
-        self.orders_data: Base = o_d
+        self.files_data = Files()
+        self.users_data = u_d
+        self.orders_data = o_d
         self.months = ['month', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
         self.weekdays = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
     

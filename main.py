@@ -1,5 +1,5 @@
 from Gbot import GeorgeBot
-from base import Base
+from base import Profiles, Orders, getBase
 import telebot
 import threading
 import sys
@@ -37,8 +37,8 @@ class Admin:
         self.a_r_deep_limit = -1
         self.a_r_deep_count = 0
         self.exceptor = Exceptor()
-        self.users_data = Base('u', self)
-        self.orders_data = Base('o', self)
+        self.users_data:Profiles = getBase("Profiles")
+        self.orders_data:Orders = getBase("Orders")
         self.bot = GeorgeBot(getattr(self, "token", ''), self.users_data, self.orders_data)
         self.scheduler = Scheduler(self.bot)
         self.thr_presets = {
@@ -309,7 +309,7 @@ class Admin:
         scheduler = getattr(self, 'scheduler', Scheduler(self.bot))
         scheduler.schedule()
 
-    def __main(self, bot: GeorgeBot, users_data: Base, orders_data: Base):
+    def __main(self, bot: GeorgeBot, users_data: Profiles, orders_data: Orders):
         @bot.message_handler(commands=["start"])
         def start(message: telebot.types.Message):
             user = message.from_user
@@ -490,7 +490,7 @@ class Admin:
             path_end = path[-1]
             id_list = list(map(int, re.findall(r'(?<=#)\d*', path_end)))
             if order_id != date:
-                self.orders_data.update(order_id, "deadline", date)
+                self.orders_data._update(order_id, "deadline", date)
                 message_id = id_list.pop(-1)
                 chat_id = id_list.pop(-1)
                 try:

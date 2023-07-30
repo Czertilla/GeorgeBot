@@ -43,7 +43,9 @@ class DataDict(dict):
         return result
 
 class MetaBase(type):
+    _exception = object()
     _instance_dict = {}
+    _anchor_point = "anchor"
     _base_path = "db/"
     _base_name = "data"
     _base_extension = "db"
@@ -52,12 +54,14 @@ class MetaBase(type):
         if table_info is None:
             return
         namespace = {"_table_struct": table_info,
+                     "_anchor_point": cls._anchor_point,
+                     "_exception": cls._exception,
                      "_base_path": cls._base_path,
                      "_base_name": cls._base_name,
                      "_base_extension": cls._base_extension,
                      }
         namespace.update(**attrs)
-        return super(MetaBase, cls).__new__(cls, name, bases, namespace)
+        return super(MetaBase, cls).__new__(cls, name, (cls.BasicBase,), namespace)
 
     # def __init__(cls, name, bases, namespace):
     #     super().__init__(name, bases, namespace)
@@ -69,6 +73,7 @@ class MetaBase(type):
         else:
             instance = cls._instance_dict.get(cls.__name__)
         return instance
+    
 
     @classmethod
     def get_table_info(meta, name:str):
@@ -85,7 +90,8 @@ class MetaBase(type):
                     return float
                 case _:
                     return object
-        _tnames = getattr(MetaBase, '_tnames', meta.get_base_names())
+        if (_tnames:=getattr(MetaBase, '_tnames', meta.get_base_names())) is None:
+            return
         if name not in _tnames:
             return
         info = meta.BasicBase.execute(meta, f"PRAGMA table_info({name})", ()).fetchall()
@@ -100,7 +106,10 @@ class MetaBase(type):
 
     @classmethod
     def get_base_names(meta): 
-        names = meta.BasicBase.execute(meta, "SELECT name FROM sqlite_master WHERE type='table'", ()).fetchall()
+        names = meta.BasicBase.execute(meta, "SELECT name FROM sqlite_master WHERE type='table'", ())
+        if names is None:
+            return
+        names = names.fetchall()
         meta._tnames = [x[0] for x in names]
         return meta._tnames
 
@@ -125,31 +134,16 @@ class MetaBase(type):
                     break
             else:
                 self._rowid = None
-            self.columns_str = str(self.columns).replace("'", '')
-            self.columns_temp = re.sub(r'[^,]*', '?', self.columns_str)
-            # try:
-            #     if self.tname == 'profiles':
-            #         self.columns = ('id', 'username', 'first_name', 'last_name',
-            #         'language_code', 'status', 'reputation', 'registered', 'nav', 'sys_lang', 'filters', '_unban_date')
-            #     elif self.tname == 'orders':
-            #         self.columns = ('id', 'customer', 'status', '_status_updated', 'type', 'master', 'description', 
-            #                         'reference', 'product', 'deadline', '_logging', '_prev')
-            #     elif self.tname == 'files':
-            #         self.columns = ('id', 'order_id', 'path', 'bytes')
-            #     elif self.tname == 'events':
-            #         self.columns = ('id', 'time', 'code', 'regularity', 'exceptions', 'daemon', 'done', 'active')
-        
+            self.columns_str = str(tuple(self.columns)).replace("'", '')
+            self.columns_temp = re.sub(r'(?<=\(| )[^(),]*(?=\)|,)', '?', self.columns_str)
+
         def test_connect(self):
-            def getattr_(iterable):
-                return getattr(*iterable)
-            vals = ["_base_path", "_base_name", "_base_extension"]
-            base_path, base_name, base_extension = map(getattr_, [(self, val, None) for val in vals])
-            self.path = f"{base_path}{base_name}.{base_extension}"
-            if not os.path.exists(self.path):
-                logger.fatal(f"Base cannot connect to data: No such file in {self.path}")
+            path = f"{self._base_path}{self._base_name}.{self._base_extension}"
+            if not os.path.exists(path):
+                logger.fatal(f"Base cannot connect to data: No such file in {path}")
                 return
             try:
-                sqlite3.connect(self.path)
+                sqlite3.connect(path)
                 return True
             except Exception as e:
                 logger.error(f"Base cannot connect to data: {e}")
@@ -168,15 +162,16 @@ class MetaBase(type):
             if timeout is None:
                 timeout = getattr(self, "timeout", 5)
             try:
-                with sqlite3.connect(self.path, timeout=timeout) as con:
+                path = f"{self._base_path}{self._base_name}.{self._base_extension}"
+                with sqlite3.connect(path, timeout=timeout) as con:
                     cur = con.cursor()
                     result = cur.execute(request, values)
                     con.commit()
                 return result
             except Exception as e:
-                logger.warning(f"failed connection to {self._base_name} attempt: {e}")
-                if ec <= 5:
-                    self.execute(request, values)
+                logger.debug(f"failed connection to {self._base_name} attempt: {e}")
+                if ec <= 5 and getattr(self, "execute", False):
+                    self.execute(request, values, ec=ec+1)
                 else:
                     logger.error(f"failed connection to {self._base_name} attempt")
         
@@ -192,17 +187,54 @@ class MetaBase(type):
 
         def generate(self, data:tuple|None) -> dict:
             if data is None:
-                return {None for _ in self.columns}
-            else:
-                return {key[int(key.startswith('_'))]: data[i] for i, key in enumerate(self.columns)}
+                return {col:None for col in self.columns}
+            sturcture = self._structure
+            result = {}
+            for i, col in enumerate(self.columns):
+                info:dict = sturcture.get(col)
+                if subt := info.get('anchor'):
+                    subtable = getBase(subt)
+                    val = subtable.hoist(data[i])
+                else:
+                    val = data[i]
+                result.update({col[int(col.startswith('_')):]: val})
+            return result
         
         def get_default(self, col):
             info:dict = self._structure.get(col)
-            return info.get("default")
+            dfl = info.get("default")
+            if dfl is None:
+                return dfl
+            cls = info.get('type')
+            return cls(dfl)
+        
+        def hoist(self, anchor):
+            col = self._anchor_point
+            if col not in self.columns:
+                logger.error(f"hoisting from <<{self.tname}>> exception: No such anchor-column <{col}>")
+                return {}
+            id_list = self.execute(f"SELECT id FROM {self.tname} WHERE {col}=?", (anchor,))
+            result = {}
+            if id_list is None:
+                return result
+            id_list = id_list.fetchall()
+            for ID in id_list:
+                row = self.fetch(ID[0])
+                row_id = row.pop(self._rowid)
+                if row is not None:
+                    row.pop(col)
+                result.update({row_id: row})
+            return result
         
         def insert(self, data:dict):
-            values = tuple([data.get(col, self.get_default(col)) for col in self.columns])
-            request = f"INSERT INTO profiles {self.columns_str} VALUES {self.columns_temp}"
+            values = []
+            for col in self.columns:
+                if not self._parse(col, val:=data.get(col, self.get_default(col))):
+                    logger.error(f"{data} have not inserted in <<{self.tname}>>")
+                    return
+                values.append(val)
+            values = tuple(values)
+            request = f"INSERT INTO {self.tname} {self.columns_str} VALUES {self.columns_temp}"
             self.execute(request, values)
 
         def verify(self, id):
@@ -212,7 +244,15 @@ class MetaBase(type):
             if id is None:
                 return None
             return not id.fetchone() is None
-
+        
+        def _set_anchor(self, col:str, subtable:str|None=None):
+            info:dict = self._structure.get(col)
+            if info is None:
+                return
+            if getBase(subtable) is None:
+                return
+            info.update({'anchor': subtable})
+            
         def search(self, what=None, sample:tuple=(), only_whole=True, column_wise=False) -> dict[dict[int]]|list:
             """Returns a dictionary with the keys 'whole' and 'part', which correspond to the lists of  table row 
             identifiers for full and partial matches with the variable 'what', respectively. The search is performed only 
@@ -266,11 +306,26 @@ class MetaBase(type):
             for ID in id_list:
                 answer.add(self.fetch(ID))
             return answer
+        
+        def _parse(self, column, value)->bool:
+            info:dict = self._structure.get(column)
+            head = f"Parse inadequating <{column}> in <<{self.tname}>>"
+            if info is None:
+                logger.warning(f"{head}: No such information about <<{column}>> column")
+                return False
+            if value is None and info.get('not_NULL'):
+                logger.warning(f"{head}: NoneType value in not_NULL column <{column}>")
+                return False
+            if (v:= type(value)) != (c:=info.get('type')) and value is not None:
+                logger.warning(f"{head}: type inadequating ({v} -> {c})")
+                return False
+            return True 
 
         def update(self, ID, request:dict):   
             for col, val in request.items():
                 self._update(ID, col, val)
         
+
         def _update(self, ID, col, value):
             if not self.verify(ID):
                 logger.warning(f"{self.tname} updating exception: No such rowid '{ID}'")
@@ -278,11 +333,14 @@ class MetaBase(type):
             if col not in self.columns:
                 logger.warning(f"{self.tname} updating exception: No such column '{col}'")
                 return
+            if not self._parse(col, value):
+                logger.warning(f"{self.tname} updating exception: value inadequate during parsing")
+                return
             logger.debug(f"UPDATE profiles WHERE id = {ID} SET {col} = {value}")
             self.execute(f"UPDATE {self.tname} SET {col} =? WHERE id =?", (value, ID))
-
-        
-
+"""
+Custom classes ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+"""
 class Profiles(MetaBase.BasicBase, metaclass=MetaBase):
     def sign_in(self, user):
         if self.verify(user.id):
@@ -313,18 +371,24 @@ class Profiles(MetaBase.BasicBase, metaclass=MetaBase):
         self.delete(ID)
 
 
-class Files(MetaBase.BasicBase, metaclass=MetaBase):
+class Files(MetaBase.BasicBase,metaclass=MetaBase):
+    def __init__(self):
+        super().__init__()
+        self._anchor_point = "folder"
+
     def upload_file(self, file:dict) -> str:
-        data = self.execute("SELECT id FROM files WHERE path= ?", (file.get('path'),)).fetchone()
-        if data is None:
-            ID = self.new_file(file)
+        folder = self.hoist(file.get('folder'))
+        info:dict
+        for rowid, info in folder.items():
+            if info.get('name') == file.get('name'):
+                self.update_file(ID:=rowid, file)
+            break
         else:
-            ID = data[0]
-            self.update_file(ID, file)
+            ID = self.new_file(file)
         return ID
     
     def download_file(self, ID) -> bytes:
-        file = self.fetch(ID, autodecode=False)
+        file = getBase("Bytedata").fetch(ID)
         return bz2.decompress(file.get("bytes", b''))
     
     def update_file(self, ID, request=dict):
@@ -333,19 +397,54 @@ class Files(MetaBase.BasicBase, metaclass=MetaBase):
                 continue
             if col == "bytes":
                 val = bz2.compress(val)
+                getBase("Bytedata").update(ID, {"bytes": val})
             self.execute(f"UPDATE files SET {col} =? WHERE id =?", (val, ID))
     
     def new_file(self, file: dict):
-        order_id = file.get("order_id")
-        path = file.get('path')
-        file = bz2.compress(file.get('bytes'))
+        file_bytes = bz2.compress(file.pop('bytes'))
         ID = str(uuid.uuid4())
         while self.verify(ID):
             ID = str(uuid.uuid4())
-        self.execute("INSERT INTO files (id, order_id, path, bytes) VALUES (?, ?, ?, ?)", 
-                     (ID, order_id, path, file))
+        file.update({"id": ID})
+        self.insert(file)
+        getBase("Bytedata").insert({"id": ID, 'bytes': file_bytes})
         return ID
 
+
+class Events(MetaBase.BasicBase, metaclass=MetaBase):       
+    def new_event(self, event:dict):
+        ID = str(uuid.uuid4())
+        while self.verify(ID):
+            ID = str(uuid.uuid4())
+        regularity = self.convert(event.get('regularity'))
+        exceptions = self.convert(event.get('exceptions'))
+        event.update({"id": ID,"regularity":regularity,'exceptions':exceptions})
+        self.insert(event)
+        return ID 
+    
+    def convert(self, obj):
+        match type(obj).__name__:
+            case 'dict':
+                regularity = clock.timedelta(**obj).total_seconds()
+                return clock.try_int(regularity)
+            case 'int':
+                return (regularity:=obj)
+            case 'list':
+                exceptions = '/'.join(obj)
+                return exceptions
+            case 'str':
+                return (exceptions:=obj)
+            case _:
+                return obj
+    
+    def fetch(self, id):
+        result = super().fetch(id)
+        for key, val in result.copy().items():
+            if val is None:
+                result.pop(key)
+        exceptions:str = result.get('exceptions', '')
+        result.update({"exceptions": exceptions.split('/')})
+        return result
     
     def update_event(self, ID, request:dict, /, autoencode:bool=True):
         for key, val in request.items():
@@ -353,110 +452,88 @@ class Files(MetaBase.BasicBase, metaclass=MetaBase):
                 case 'event':
                     ID = self.new_event(val)
                     return ID
+                case 'regularity'|'exceptions':
+                    self._update(ID, key, self.convert(val))
                 case _:
                     if key not in self.columns:
                         continue
-            if type(val) not in {str, bytes, bool, int, float} and autoencode:
-                try:
-                    val = json.dumps(val).encode()
-                except Exception as e:
-                    logger.error(str(e))
-            self.execute(f"UPDATE events SET {key} = ? WHERE id = ?", (val, ID))
+                    self._update(ID, key, val)
         return ID
 
 
-    def new_event(self, event:dict):
+class Logs(MetaBase.BasicBase, metaclass=MetaBase):
+    def new_log(self, anchor, log, date)->None:
         ID = str(uuid.uuid4())
         while self.verify(ID):
-            ID = str(uuid.uuid4())
-        regularity = event.get('regularity')
-        if type(regularity) is dict:
-            regularity = clock.timedelta(**regularity).total_seconds()
-        regularity = clock.try_int(regularity)
-        event.update({"id": ID,
-                      "regularity": regularity,
-                      "time": event.get('time', '~'),
-                      "code": event.get('code', 'test'),
-                      "daemon": event.get('dayemon', 0),
-                      "done": event.get('done', 0),
-                      "active": event.get('active', 1)})
-        values = tuple([event.get(key) for key in self.columns])
-        self.execute(f"INSERT INTO events {self.columns} VALUES ({('?,'*len(self.columns))[:-1]})", values)
-        return ID
+            ID = str(uuid.uuid4)
+        request = {'id': ID,
+                    'time': date,
+                    'log': log,
+                    'anchor': anchor}
+        self.insert(request)
 
-    
+
 class Orders(MetaBase.BasicBase, metaclass=MetaBase):
+    def __init__(self)->None:
+        super().__init__()
+        self._set_anchor("reference", "Files")
+        self._set_anchor("_logging", "Logs")
+        # self._set_anchor("product", "Files")
+
     def new_order(self, user:dict) -> int:
-        suc = False
-        while not suc:
+        ID = random.randint(100000000, 999999999)
+        while self.verify(ID):
             ID = random.randint(100000000, 999999999)
-            suc = not self.verify(ID)
         data = {col: getattr(user, col, self.get_default(col)) for col in self.columns}
-        clock.now()
+        data.update({"_status_updated":(now:=clock.now()), 'id': ID, 'reference':f"{ID}/reference",
+                     'product':f'{ID}/product', '_logging': f'{ID}/logging'})
         logger.debug(f"INSERT INTO orders new_order with id = {ID}")
-        # self.execute("INSERT INTO orders (id, customer, status, _status_updated, reference, product, _logging) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        #     (
-        #         ID,
-        #         user['id'],
-        #         "created",
-        #         now,
-        #         json.dumps({}).encode('utf-8'),
-        #         json.dumps({}).encode('utf-8'),
-        #         json.dumps({'created': now}).encode('utf-8')
-        #     ))
-        self.insert()
+        self.insert(data)
+        self._update_order_status(ID, "created", date=now)
         return ID
     
     def update_order(self, ID, request=dict, hide_logs:bool=False, autoencode:bool=True):
-        # if 'telegram_origin' in request:
-        #     user = vars(request.pop('telegram_origin'))
-        #     for col in user:
-        #         if col in self.columns:
-        #             self.update(id, col, user[col])
-        for col in request.keys():
-            val = request.get(col)
-            if type(val) not in {str, bytes, bool, int, float} and autoencode:
-                try:
-                    val = json.dumps(val).encode()
-                except Exception as e:
-                    logger.error(f'{e}')
-            if col not in self.columns:
-                continue
-            match col:
-                case 'status':
-                    self._update_order_status(ID, val)
-                case _:
-                    self.execute(f"UPDATE orders SET {col} =? WHERE id =?", (val, ID))
-            if not hide_logs:
-                logger.debug(f"UPDATE orders WHERE id = {ID} SET {col} = {request[col]}")
+        reference = request.pop('reference', None)
+        product = request.pop('product', None)
+        status = request.pop('status', None)
+        if status:
+            self._update_order_status(ID, status)
+        self.update(ID, request)
 
 
-    def _update_order_status(self, ID, new_status) -> None:
+    def _update_order_status(self, ID, new_status, /, date=None) -> None:
         order = self.fetch(ID)
         status = order.get('status')
         if status in {'outdated', 'closed'}:
-            logger.warning(f"order #{ID} was {status}, trying update status to {status}")
+            logger.warning(f"order #{ID} was {status}, trying update status to {new_status}")
             return
-        logging:dict = order.get('logging')
-        status_updated = clock.now()
-        logging.update({new_status: status_updated})
-        logging = json.dumps(logging).encode()
-        request = {"_logging": logging, "_status_updated": status_updated}
-        self.update_order(ID, request, hide_logs=True)
-        self.execute("UPDATE orders SET status =? WHERE id =?", (new_status, ID))
+        subtable:Logs = Logs()
+        if date is None:
+            status_updated = clock.now()
+        else:
+            status_updated = date
+        subtable.new_log(f"{ID}/logging", new_status, status_updated)
+        request = {"status": new_status, "_status_updated": status_updated}
+        self.update(ID, request)
 
-def getBase(name, *args, **kwargs)->MetaBase()|Profiles|Files|Orders|Events|Bytes|Logs:
+def getBase(name, *args, **kwargs)->MetaBase.BasicBase|Profiles|Files|Orders|Events|Logs:
     match name:
         case "Profiles":
             cls = Profiles
+        case "Files":
+            cls = Files
+        case "Orders":
+            cls = Orders
+        case "Logs":
+            cls = Logs
         case _:
-            cls = MetaBase(name, tuple(args)+(MetaBase.BasicBase), kwargs)
+            cls = MetaBase(name, tuple(args), kwargs)
+    if cls is None:
+        return
     return cls()
 
 if __name__ == "__main__":
-    users_data:Profiles = getBase('Profiles')
-    users_data.update_profile()
-    users = getBase("Profiles")
-    print(users_data, users)
-
+    files_data:Files = getBase("Files")
+    orders_data:Orders = getBase("Orders")
+    
     

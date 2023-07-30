@@ -56,9 +56,7 @@ import logging.config
 
 execute = base.MetaBase.BasicBase.execute
 
-a = execute(base.MetaBase, "SELECT name FROM sqlite_master WHERE type='table'", ())
-b = execute(base.MetaBase, "PRAGMA table_info(profiles)", ()).fetchall()
-a= a.fetchall()
+a = re.sub(r'(?<=\(| )[^(),]*(?=\)|,)', '?', '(id, tg_id, f_name, path, order_id, bytes)')
 print(a)
 
 
