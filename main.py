@@ -13,7 +13,6 @@ from Gbot import exc
 from get_version import get_version
 import logging.config
 import splitter
-import pickle
 import json
 
 
@@ -29,10 +28,10 @@ logger = logging.getLogger(__name__)
 
 class Admin:
     def __init__(self) -> None:
-        self.complete = False
         self.s = self.start
         self.c = self.close
         self._get_bot_presets()
+        self.complete = False
         self.auto_restart = False
         self.a_r_deep_limit = -1
         self.a_r_deep_count = 0
@@ -144,24 +143,17 @@ class Admin:
 
     @exc.protect
     def update_presets(self, *args) -> dict[str]:
-        if not args:
-            return
-        b = args[0][0]
-        if b != '{':
-            logger.error(f"sintactic error: excpected '{'{'}', but {args[0]} given")
-            return
-        line = ''
-        for word in args:
-            line += word
-        while not '}' in line:
-            line += input()
-        line = line.replace(' ', '').replace('{', '').replace(',}', '').replace('}', '')
-        array = line.split(',')
+        try:
+            args = json.loads(' '.join(args))
+        except:
+            pass
+        while type(args) != dict:
+            try:
+                args = json.loads(input("Please insert json-dict: "))
+            except:
+                pass
         presets = self.presets(None)
-        for data in array:
-            spot = data.find(':')
-            key, val = data[:spot], data[spot+1:]
-            presets.update({key:val})
+        presets.update(args)
         self._set_presets(presets)
     
     @exc.protect
@@ -199,7 +191,7 @@ class Admin:
 
     
     @exc.protect
-    def show_data(self, name, mode="table", *args):
+    def show_data(self, name, mode="dict", *args):
         match name:
             case "profiles":
                 DATA = self.users_data.show()
@@ -248,6 +240,20 @@ class Admin:
                 prob_count += 1
     
     @exc.protect
+    def help(self, *args, **kwargs) -> None:
+        logger.info(
+"""
+start- - - - - - to start session
+close- - - - - - to close session
+show_data [table_name] [mode=(dict/table/file)] - to show all data from db
+set_event [mode =(new/edit/on/off/complete/resume/del)] [args =([json-like dict - for 'new'/'edit']/[id for other])]
+presets- - - - - show bot_presets.json
+clear_presets- - clear bot_presets.json
+update_presets - update (create if not exist) bot_presets.json
+
+""")
+        
+    @exc.protect
     def _ban_profile(self, ID, term, reason='br-other'):
         user = self.users_data.fetch(ID)
         match user.get('status'):
@@ -265,8 +271,8 @@ class Admin:
                 return
             case None:
                 return
-        self.bot.ban(ID, term, reason)
         self.scheduler.new_event({"code":f"unban.{ID}", "time":term})
+        self.bot.ban(ID, term, reason)
 
 
     @exc.protect
@@ -291,12 +297,12 @@ class Admin:
                 presets: dict = json.load(f)
             except Exception as e:
                 logger.info(e)
-
+                presets = {}
         for key, val in presets.items():
             setattr(self, key, val)
     
     def _set_presets(self, presets:dict[str]):
-        with open('bot_presets.json', 'wb') as f:
+        with open('bot_presets.json', 'w') as f:
             try:
                 json.dump(presets, f)
             except Exception as e:
@@ -814,6 +820,7 @@ class Admin:
                     result = bot.text_handler(message, user, path_end)
                 case "document" | "audio":
                     bot.document_handler(message, user, path_end)
+                    return
                 case _:
                     pass
             if result is not None:

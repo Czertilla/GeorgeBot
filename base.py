@@ -2,8 +2,6 @@ import logging
 import re
 import sqlite3
 import os
-import json
-import pickle
 import clock
 import phrases
 import random
@@ -73,7 +71,6 @@ class MetaBase(type):
         else:
             instance = cls._instance_dict.get(cls.__name__)
         return instance
-    
 
     @classmethod
     def get_table_info(meta, name:str):
@@ -90,6 +87,12 @@ class MetaBase(type):
                     return float
                 case _:
                     return object
+        def get_dflt(sql_val, py_type:object):
+            if sql_val is None:
+                return
+            if py_type == type('') and sql_val[0] == sql_val[-1] == "'":
+                return sql_val[1:-1]
+            return py_type(sql_val)
         if (_tnames:=getattr(MetaBase, '_tnames', meta.get_base_names())) is None:
             return
         if name not in _tnames:
@@ -97,9 +100,9 @@ class MetaBase(type):
         info = meta.BasicBase.execute(meta, f"PRAGMA table_info({name})", ()).fetchall()
         table_info = {col[1]: {
                 "num": col[0],
-                "type": get_type(col[2]),
+                "type": (t:=get_type(col[2])),
                 "not_NULL": bool(col[3]),
-                "default": col[4],
+                "default": get_dflt(col[4], t),
                 "iskey": bool(col[5])
             } for col in info}
         return table_info
@@ -150,10 +153,10 @@ class MetaBase(type):
                 exc.tracebacking()
                 return False
             
-        def delete(self, id) -> bool:
+        def delete(self, ID) -> bool:
             try:
-                logger.debug(f"DELETE FROM {self.tname} WHERE id = {id}")
-                self.execute(f"DELETE FROM {self.tname} WHERE id=?", (id,))
+                logger.debug(f"DELETE FROM {self.tname} WHERE id = {ID}")
+                self.execute(f"DELETE FROM {self.tname} WHERE id=?", (ID,))
                 return True
             except:
                 return False
@@ -175,8 +178,8 @@ class MetaBase(type):
                 else:
                     logger.error(f"failed connection to {self._base_name} attempt")
         
-        def fetch(self, id):
-            data = self.execute(f"SELECT * FROM {self.tname} WHERE {self._rowid}=?", (id, ))
+        def fetch(self, ID):
+            data = self.execute(f"SELECT * FROM {self.tname} WHERE {self._rowid}=?", (ID, ))
             data = data.fetchone()
                 # if type(val) == bytes and autodecode:
                 #     val = json.loads(val)
@@ -200,6 +203,12 @@ class MetaBase(type):
                 result.update({col[int(col.startswith('_')):]: val})
             return result
         
+        def gen_id(self):
+            ID = str(uuid.uuid4())
+            while self.verify(ID):
+                ID = str(uuid.uuid4())
+            return ID
+
         def get_default(self, col):
             info:dict = self._structure.get(col)
             dfl = info.get("default")
@@ -237,13 +246,13 @@ class MetaBase(type):
             request = f"INSERT INTO {self.tname} {self.columns_str} VALUES {self.columns_temp}"
             self.execute(request, values)
 
-        def verify(self, id):
-            if type(id) not in (int, str):
+        def verify(self, ID):
+            if type(ID) not in (int, str):
                 return None
-            id = self.execute(f"SELECT * FROM {self.tname} WHERE {self._rowid}=?", (id,))
-            if id is None:
+            ID = self.execute(f"SELECT * FROM {self.tname} WHERE {self._rowid}=?", (ID,))
+            if ID is None:
                 return None
-            return not id.fetchone() is None
+            return not ID.fetchone() is None
         
         def _set_anchor(self, col:str, subtable:str|None=None):
             info:dict = self._structure.get(col)
@@ -325,7 +334,6 @@ class MetaBase(type):
             for col, val in request.items():
                 self._update(ID, col, val)
         
-
         def _update(self, ID, col, value):
             if not self.verify(ID):
                 logger.warning(f"{self.tname} updating exception: No such rowid '{ID}'")
@@ -336,7 +344,7 @@ class MetaBase(type):
             if not self._parse(col, value):
                 logger.warning(f"{self.tname} updating exception: value inadequate during parsing")
                 return
-            logger.debug(f"UPDATE profiles WHERE id = {ID} SET {col} = {value}")
+            logger.debug(f"UPDATE {self.tname} WHERE id = {ID} SET {col} = {value}")
             self.execute(f"UPDATE {self.tname} SET {col} =? WHERE id =?", (value, ID))
 """
 Custom classes ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
@@ -355,7 +363,7 @@ class Profiles(MetaBase.BasicBase, metaclass=MetaBase):
         if data.get('id') == 715648962:
             data.update({'status': "god"})
         data.update({"registered": clock.now()})
-        logger.info(f"new profile, id={id}")
+        logger.info(f"new profile, id={user.id}")
         self.insert(data)
      
     def update_profile(self, ID, request=dict):
@@ -376,18 +384,18 @@ class Files(MetaBase.BasicBase,metaclass=MetaBase):
         super().__init__()
         self._anchor_point = "folder"
 
-    def upload_file(self, file:dict) -> str:
+    def download_file(self, file:dict) -> str:
         folder = self.hoist(file.get('folder'))
         info:dict
         for rowid, info in folder.items():
             if info.get('name') == file.get('name'):
                 self.update_file(ID:=rowid, file)
-            break
+                break
         else:
             ID = self.new_file(file)
         return ID
     
-    def download_file(self, ID) -> bytes:
+    def upload_file(self, ID) -> bytes:
         file = getBase("Bytedata").fetch(ID)
         return bz2.decompress(file.get("bytes", b''))
     
@@ -402,9 +410,7 @@ class Files(MetaBase.BasicBase,metaclass=MetaBase):
     
     def new_file(self, file: dict):
         file_bytes = bz2.compress(file.pop('bytes'))
-        ID = str(uuid.uuid4())
-        while self.verify(ID):
-            ID = str(uuid.uuid4())
+        ID = self.gen_id()
         file.update({"id": ID})
         self.insert(file)
         getBase("Bytedata").insert({"id": ID, 'bytes': file_bytes})
@@ -413,9 +419,7 @@ class Files(MetaBase.BasicBase,metaclass=MetaBase):
 
 class Events(MetaBase.BasicBase, metaclass=MetaBase):       
     def new_event(self, event:dict):
-        ID = str(uuid.uuid4())
-        while self.verify(ID):
-            ID = str(uuid.uuid4())
+        ID = self.gen_id()
         regularity = self.convert(event.get('regularity'))
         exceptions = self.convert(event.get('exceptions'))
         event.update({"id": ID,"regularity":regularity,'exceptions':exceptions})
@@ -437,8 +441,8 @@ class Events(MetaBase.BasicBase, metaclass=MetaBase):
             case _:
                 return obj
     
-    def fetch(self, id):
-        result = super().fetch(id)
+    def fetch(self, ID):
+        result = super().fetch(ID)
         for key, val in result.copy().items():
             if val is None:
                 result.pop(key)
@@ -463,9 +467,7 @@ class Events(MetaBase.BasicBase, metaclass=MetaBase):
 
 class Logs(MetaBase.BasicBase, metaclass=MetaBase):
     def new_log(self, anchor, log, date)->None:
-        ID = str(uuid.uuid4())
-        while self.verify(ID):
-            ID = str(uuid.uuid4)
+        ID = self.gen_id()
         request = {'id': ID,
                     'time': date,
                     'log': log,
@@ -484,9 +486,12 @@ class Orders(MetaBase.BasicBase, metaclass=MetaBase):
         ID = random.randint(100000000, 999999999)
         while self.verify(ID):
             ID = random.randint(100000000, 999999999)
-        data = {col: getattr(user, col, self.get_default(col)) for col in self.columns}
-        data.update({"_status_updated":(now:=clock.now()), 'id': ID, 'reference':f"{ID}/reference",
-                     'product':f'{ID}/product', '_logging': f'{ID}/logging'})
+        customer = user.get('id')
+        data = {"_status_updated":(now:=clock.now()), 
+                     'id': ID, 
+                     'customer': customer,
+                     'reference':f"{ID}/reference",
+                     'product':f'{ID}/product', '_logging': f'{ID}/logging'}
         logger.debug(f"INSERT INTO orders new_order with id = {ID}")
         self.insert(data)
         self._update_order_status(ID, "created", date=now)
@@ -500,6 +505,14 @@ class Orders(MetaBase.BasicBase, metaclass=MetaBase):
             self._update_order_status(ID, status)
         self.update(ID, request)
 
+    def delete(self, ID:int) -> bool:
+        subtable:Files = getBase('Files')
+        id_list = subtable.search(f"{ID}/", 
+                                  sample=('folder',), 
+                                  only_whole=False).get('part')['']
+        for f_id in id_list:
+            subtable.delete(f_id)
+        return super().delete(ID)
 
     def _update_order_status(self, ID, new_status, /, date=None) -> None:
         order = self.fetch(ID)
@@ -535,5 +548,5 @@ def getBase(name, *args, **kwargs)->MetaBase.BasicBase|Profiles|Files|Orders|Eve
 if __name__ == "__main__":
     files_data:Files = getBase("Files")
     orders_data:Orders = getBase("Orders")
-    
+    orders_data.delete(577812096)
     

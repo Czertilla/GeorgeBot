@@ -1,6 +1,6 @@
 import logging
 import telebot
-from base import Profiles, Orders, Files 
+from base import getBase, Profiles, Orders, Files 
 from exceptor import Exceptor
 from phrases import tell
 from phrases import language_codes
@@ -30,7 +30,8 @@ def uknw(func):
 class GeorgeBot(telebot.TeleBot):
     def __init__(self, token, u_d:Profiles, o_d:Orders):
         telebot.TeleBot.__init__(self, token)
-        self.files_data = Files()
+        files_data:Files = getBase("Files")
+        self.files_data = files_data
         self.users_data = u_d
         self.orders_data = o_d
         self.months = ['month', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
@@ -429,7 +430,7 @@ class GeorgeBot(telebot.TeleBot):
                 msg = self.send_message(ID, text, parse_mode="HTML", reply_markup=menu)
                 self.set_msg_to_del(user, msg)
             case "edit_type_menu":
-                pass
+                self.display(user, "unknw_des")
             case "enter_description_menu":
                 menu.add(self.display(user, "back"))
                 menu.add(self.display(user, "back_to_home"))
@@ -491,7 +492,7 @@ class GeorgeBot(telebot.TeleBot):
                 f_info:dict
                 for i, item in enumerate(sorted(reference.items())):
                     f_id, f_info = item
-                    f_name = f_info.get("f_name", f'file{i}')
+                    f_name = f_info.get("name", f'file{i}')
                     select = select_code ^ 2**(l-i-1)
                     menu.add(button('❌'*(selected[i] == '1')+f_name, callback_data=f"s|rd|{select}"))
                 optional_line = []
@@ -510,10 +511,16 @@ class GeorgeBot(telebot.TeleBot):
             case "reference_viewer":
                 reference:dict = order.get("reference", {})
                 for f_id, f_info in reference.items():
-                    f_name = f_info.get('f_name')
+                    f_name = f_info.get('name', 'unknow file')
                     menu.add(button(f_name, callback_data=f"to file#{order_id}#r#{f_id}"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
-                self.send_message(ID, tell("reference_viewer", lang, inset={'loc': tell("reference_of_order", lang, ignore_all_insets=True)}), reply_markup=menu)
+                self.send_message(ID, 
+                                  tell("reference_viewer", 
+                                       lang, 
+                                       inset={'loc': tell("reference_of_order", 
+                                                          lang, 
+                                                          ignore_all_insets=True)}), 
+                                  reply_markup=menu)
             case "view_file":
                 f_id, loc = user.get('f_id'), user.get('f_loc')
                 folder:dict = order.get(loc)
@@ -573,17 +580,17 @@ class GeorgeBot(telebot.TeleBot):
                 document = audio
             file_info = self.get_file(document.file_id)
             file_bytes = self.download_file(file_info.file_path)
-            file_name = document.file_name
-            # file_decoded = str(file_bytes, encoding='ISO-8859-1')
-            path = folder_path + file_name
             file = {
-                'order_id': path[:path.find('/')],
-                'path': path,
-                'bytes': file_bytes
+                'tg_id': document.file_id,
+                'name': document.file_name,
+                'folder': folder_path,
+                'bytes': file_bytes,
             }
-            ID = self.files_data.upload_file(file)
-            file_info = {"f_name":file_name, "tg_id": document.file_id}
-            return ID, file_info
+            ID = self.files_data.download_file(file)
+            if ID is None:
+                return
+            setattr(file_info, "f_name", file.get('name'))
+            return file_info
         except Exception as e:
             self.reply_to(message, e)
 
@@ -594,7 +601,7 @@ class GeorgeBot(telebot.TeleBot):
             return {'document': tg_id}
         except:
             f_name = file_info.get('f_name')
-            file = self.files_data.download_file(f_id)
+            file = self.files_data.upload_file(f_id)
             return {'document': file, 'visible_file_name': f_name}
 
     @exc.protect
@@ -611,21 +618,13 @@ class GeorgeBot(telebot.TeleBot):
         loc, order_id, chat_id, msg_id = (path_end.split('#') + [None]*3)[:4]
         match loc:
             case "reference_of_order":
-                add_on = self.document_download(message, f"{order_id}/reference/")
-                if add_on is None:
+                add_on_info = self.document_download(message, f"{order_id}/reference")
+                if add_on_info is None:
                     return
-                add_on_id, add_on_info = add_on
-                documents: dict = self.orders_data.fetch(order_id).get('reference', {})
-                documents.update({add_on_id: add_on_info})
-                # documents = json.dumps(documents).encode('ISO-8859-1')
-                documents = json.dumps(documents).encode('utf-8')
-                request = {"reference": documents}
-                func = self.orders_data.update_order
+                user.update({'file_name': getattr(add_on_info, "f_name", 'unnknow file_name')})
                 display_code = "edit_reference_menu"
             case _:
                 return
-        func(order_id, request)
-        user.update({'file_name': add_on_info.get("f_name", 'unnknow file_name')})
         self.display(user, 'good_file') 
         try:
             self.delete_message(chat_id, msg_id)

@@ -13,6 +13,7 @@ def tell(code:str, lang:str='en', inset:dict={}, ignore_all_insets:bool=False) -
     temp = phrase.get(lang, phrase.get('en'))
     if ignore_all_insets:
         temp = re.sub(r'<.*>', '', temp)
+        return temp
     for i, I in inset.items():
         temp = temp.replace(f'<{i}>', str(I), 1)
     return temp
