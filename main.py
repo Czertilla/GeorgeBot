@@ -1,5 +1,5 @@
 from Gbot import GeorgeBot
-from base import Base
+from base import Profiles, Orders, getBase
 import telebot
 import threading
 import sys
@@ -10,9 +10,9 @@ from schedule import Scheduler
 from exceptor import Exceptor
 from available_days import available_days
 from Gbot import exc
+from get_version import get_version
 import logging.config
 import splitter
-import pickle
 import json
 
 
@@ -28,16 +28,16 @@ logger = logging.getLogger(__name__)
 
 class Admin:
     def __init__(self) -> None:
-        self.complete = False
         self.s = self.start
         self.c = self.close
         self._get_bot_presets()
+        self.complete = False
         self.auto_restart = False
         self.a_r_deep_limit = -1
         self.a_r_deep_count = 0
         self.exceptor = Exceptor()
-        self.users_data = Base('u', self)
-        self.orders_data = Base('o', self)
+        self.users_data:Profiles = getBase("Profiles")
+        self.orders_data:Orders = getBase("Orders")
         self.bot = GeorgeBot(getattr(self, "token", ''), self.users_data, self.orders_data)
         self.scheduler = Scheduler(self.bot)
         self.thr_presets = {
@@ -88,7 +88,7 @@ class Admin:
     def close(self, *threads) -> None:
         logger.info("closing process:")
         if not threads or threads == 'all':
-            threads = self.threads.copy().keys()
+            threads = self.threads.copy()
             self.complete = True
         for thr in threads:
             logger.info(f"|\tthread {thr}:")
@@ -118,7 +118,7 @@ class Admin:
     @exc.protect
     def dir(self):
         var_dict = vars(self)
-        def convert (val):
+        def convert(val):
             try: 
                 json.dumps(val)
             except:
@@ -143,24 +143,17 @@ class Admin:
 
     @exc.protect
     def update_presets(self, *args) -> dict[str]:
-        if not args:
-            return
-        b = args[0][0]
-        if b != '{':
-            logger.error(f"sintactic error: excpected '{'{'}', but {args[0]} given")
-            return
-        line = ''
-        for word in args:
-            line += word
-        while not '}' in line:
-            line += input()
-        line = line.replace(' ', '').replace('{', '').replace(',}', '').replace('}', '')
-        array = line.split(',')
+        try:
+            args = json.loads(' '.join(args))
+        except:
+            pass
+        while type(args) != dict:
+            try:
+                args = json.loads(input("Please insert json-dict: "))
+            except:
+                pass
         presets = self.presets(None)
-        for data in array:
-            spot = data.find(':')
-            key, val = data[:spot], data[spot+1:]
-            presets.update({key:val})
+        presets.update(args)
         self._set_presets(presets)
     
     @exc.protect
@@ -198,7 +191,7 @@ class Admin:
 
     
     @exc.protect
-    def show_data(self, name, mode="table", *args):
+    def show_data(self, name, mode="dict", *args):
         match name:
             case "profiles":
                 DATA = self.users_data.show()
@@ -231,8 +224,8 @@ class Admin:
             threads = ['m', 's']
         for thr in threads:
             try:
-                if getattr(self, 'bot', None) is None and 'm' in threads or 's' in threads:
-                    self.bot = GeorgeBot(getattr(self, 'token'), self.users_data, self.orders_data)
+                # if getattr(self, 'bot', None) is None and 'm' in threads or 's' in threads:
+                #     self.bot = GeorgeBot(getattr(self, 'token'), self.users_data, self.orders_data)
                 if getattr(self, 'scheduler', None) is None and 's' in threads:
                     self.scheduler = Scheduler(self.bot)
                 arguments = self.thr_presets.get(thr)
@@ -246,6 +239,20 @@ class Admin:
                 global prob_count
                 prob_count += 1
     
+    @exc.protect
+    def help(self, *args, **kwargs) -> None:
+        logger.info(
+"""
+start- - - - - - to start session
+close- - - - - - to close session
+show_data [table_name] [mode=(dict/table/file)] - to show all data from db
+set_event [mode =(new/edit/on/off/complete/resume/del)] [args =([json-like dict - for 'new'/'edit']/[id for other])]
+presets- - - - - show bot_presets.json
+clear_presets- - clear bot_presets.json
+update_presets - update (create if not exist) bot_presets.json
+
+""")
+        
     @exc.protect
     def _ban_profile(self, ID, term, reason='br-other'):
         user = self.users_data.fetch(ID)
@@ -264,8 +271,8 @@ class Admin:
                 return
             case None:
                 return
-        self.bot.ban(ID, term, reason)
         self.scheduler.new_event({"code":f"unban.{ID}", "time":term})
+        self.bot.ban(ID, term, reason)
 
 
     @exc.protect
@@ -290,12 +297,12 @@ class Admin:
                 presets: dict = json.load(f)
             except Exception as e:
                 logger.info(e)
-
+                presets = {}
         for key, val in presets.items():
             setattr(self, key, val)
     
     def _set_presets(self, presets:dict[str]):
-        with open('bot_presets.json', 'wb') as f:
+        with open('bot_presets.json', 'w') as f:
             try:
                 json.dump(presets, f)
             except Exception as e:
@@ -308,7 +315,7 @@ class Admin:
         scheduler = getattr(self, 'scheduler', Scheduler(self.bot))
         scheduler.schedule()
 
-    def __main(self, bot: GeorgeBot, users_data: Base, orders_data: Base):
+    def __main(self, bot: GeorgeBot, users_data: Profiles, orders_data: Orders):
         @bot.message_handler(commands=["start"])
         def start(message: telebot.types.Message):
             user = message.from_user
@@ -317,8 +324,8 @@ class Admin:
         
         @bot.message_handler(commands=['ban'])
         @bot.access(8)
-        def ban(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def ban(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             command, *args = message.text.split() + [None]
             ID = args[0]
             if not self.users_data.verify(ID):
@@ -332,8 +339,8 @@ class Admin:
         
         @bot.callback_query_handler(func=lambda call: call.data[:3] == 'ban')
         @bot.access(8)
-        def ban_menu(call: telebot.types.CallbackQuery):
-            user = bot.get_user(call)
+        def ban_menu(call: telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(call))
             target_id, br = call.data.split('#')[1:]
             bot.set_nav(f'ban_menu#{target_id}#{br}', user, type(call))
             match br:
@@ -353,8 +360,8 @@ class Admin:
         
         @bot.message_handler(commands=['report'])
         @bot.access(2)
-        def report(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def report(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             command, *args = message.text.split() + [None]
             ID = args[0]
             if not self.users_data.verify(ID):
@@ -386,7 +393,7 @@ class Admin:
 
         @bot.callback_query_handler(func=lambda call: 'to ' in call.data)
         @bot.access()
-        def navigation(call: telebot.types.CallbackQuery):
+        def navigation(call: telebot.types.CallbackQuery, **kwargs):
             try:
                 bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             except:
@@ -426,7 +433,8 @@ class Admin:
                     edit_type(call)
                 case _:
                     unknow_destination(call)
-        
+       
+
         @bot.callback_query_handler(func=lambda call: call.data[:9] == "calendary")
         def calendary(call: telebot.types.CallbackQuery):
             user:dict = bot.get_user(call)
@@ -488,7 +496,7 @@ class Admin:
             path_end = path[-1]
             id_list = list(map(int, re.findall(r'(?<=#)\d*', path_end)))
             if order_id != date:
-                self.orders_data.update(order_id, "deadline", date)
+                self.orders_data._update(order_id, "deadline", date)
                 message_id = id_list.pop(-1)
                 chat_id = id_list.pop(-1)
                 try:
@@ -562,22 +570,32 @@ class Admin:
             user:dict = bot.get_user(call)
             err = False
             match data[1]:
+                case "type":
+                    order_type, order_id = data[2].split('#')
+                    request = {
+                        "type": order_type
+                    }
                 case "sys_lang":
                     request = {
                         "nav": user['nav']+'/swt',
                         "sys_lang": 1, 
-                        "language_code": call.data.from_user.language_code
+                        "language_code": call.from_user.language_code
                     }
                 case "language":
                     lang = data[-1]
-                    request = {"language_code": lang, "nav": user['nav']+'/swt'}
+                    request = {"language_code": lang, "nav": user['nav']+'/swt', "sys_lang": 0}
                 case _:
                     err = True
                     unknow_destination(call)
             if not err:
-                users_data.update_profile(user['id'], request)
-                user.update(request)
-                bot.display(user, "switch")
+                match data[1]:
+                    case "sys_lang"|"language":
+                        users_data.update_profile(user['id'], request)
+                        user.update(request)
+                        bot.display(user, "switch")
+                    case "type":
+                        orders_data.update_order(int(order_id), request)
+                        bot.display(user, "edit_type_menu")
         
         @bot.callback_query_handler(func=lambda call: 'del ' in call.data)
         def delete(call: telebot.types.CallbackQuery):
@@ -647,7 +665,7 @@ class Admin:
         @bot.callback_query_handler(func=lambda call: 's|' in call.data)
         def select(call:telebot.types.CallbackQuery):
             data = call.data.split('|')
-            select_list = {'rd': "reference_deleter"}
+            select_list = {'rd': "reference_deleter", 'mo': "my_orders_menu", 'mp': "my_projects_menu"}
             loc = data[1]
             location = select_list.get(loc)
             select_code = int(data[-1])
@@ -686,14 +704,14 @@ class Admin:
         
         @bot.message_handler(commands=['new'])
         @bot.access()
-        def my_orders(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def my_orders(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             user = bot.set_nav(f"my_orders", user, type(message))
             bot.display(user, "my_orders_menu")
         
         @bot.message_handler(commands=['description'])
         @bot.access()
-        def edit_description(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_description(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -701,7 +719,7 @@ class Admin:
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             if order.get('status', None) == 'created':
@@ -713,15 +731,15 @@ class Admin:
 
         @bot.message_handler(commands=['new'])
         @bot.access()
-        def new_order(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def new_order(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             order_id = bot.new_order(user)
             user = bot.set_nav(f"edit_order#{order_id}", user, type(message))
             bot.display(user, "edit_order_menu")
         
         @bot.message_handler(commands=['edit'])
         @bot.access(page_type='edit_order')
-        def edit_order(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_order(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -729,7 +747,7 @@ class Admin:
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             if order.get('status', None) == 'created':
@@ -741,7 +759,7 @@ class Admin:
         
         @bot.message_handler(commands=['references'])
         @bot.access()
-        def edit_references(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_references(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -749,7 +767,7 @@ class Admin:
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             user = bot.set_nav(f"reference_of_order#{order_id}", user, type(message))
@@ -757,7 +775,7 @@ class Admin:
         
         @bot.message_handler(commands=['type'])
         @bot.access()
-        def edit_type(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_type(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -765,7 +783,7 @@ class Admin:
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             if order.get('status', None) == 'created':
@@ -801,6 +819,7 @@ class Admin:
         
         @bot.message_handler(content_types=CONTENT_TYPES)
         def content_handler(message: telebot.types.Message):
+            bot.download_buffer.update(message.chat.id)
             user:dict = bot.get_user(message)
             if user is None:
                 bot.send_message(message.from_user.id, "Unknow user id error. Maybe profile has been deleted, please press or write /start to LOG IN")
@@ -812,6 +831,7 @@ class Admin:
                     result = bot.text_handler(message, user, path_end)
                 case "document" | "audio":
                     bot.document_handler(message, user, path_end)
+                    return
                 case _:
                     pass
             if result is not None:
@@ -820,8 +840,8 @@ class Admin:
                     case 'ban':
                         self._ban_profile(trg, term, desc)
                         bot.send_message(user.get('id'), 'user banned')
-
         try:
+            logger.debug("polling right now")
             bot.polling(none_stop=True, interval=0)
         except Exception as e:
             logger.error(f'bot polling will stoped by Fatal Error: \n\t{e}')
@@ -847,7 +867,8 @@ if __name__ == "__main__":
     # logging.basicConfig(format="%(asctime)s %(levelname)s:%(name)s:%(lineno)s> %(message)s",datefmt="%Y-%m-%d %H:%M:%S")
     from set_logging import config
     config()
-    logger.info("====================== session started =======================")
+    ver = get_version()
+    logger.info(f"{f'{ver:10s}'.replace(' ', '=')}============ session started =======================")
     admin = Admin()
     for command in sys.stdin:
         admin._command_exec(command)

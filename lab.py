@@ -1,3 +1,4 @@
+import sqlite3
 from exceptor import Exceptor
 import json
 import threading
@@ -5,16 +6,16 @@ import logging
 """27.6.2023 7:36:42"""
 import time
 from set_logging import LOGGING
-# from Gbot import GeorgeBot
-from base import Base
+from Gbot import GeorgeBot
+import base
 import clock
 import datetime
 import re
-
-orders = Base('o')
-users = Base('u')
-files = Base('f')
-events = Base('e')
+"Запись. аранжировка. сведение. трек под ключ. копия минуса. Особое"
+# orders = Base('o')
+# users = Base('u')
+# files = Base('f')
+# events = Base('e')
 
 import logging
 # from tqdm import trange
@@ -34,12 +35,21 @@ import logging
 #                     format='(%(threadName)-10s) %(message)s',
 #                     )
 import logging.config
+users = base.Profiles
+orders = base.Orders
+# bot = GeorgeBot("5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0", users, orders)
 
-logging.config.dictConfig(LOGGING)
-log = logging.getLogger(__name__)
+d = {'a':0}
 
-print(re.findall(r'[^#]*(?=#)', 'ban_menu#627784637#abusive_behavior'))
-
+def p():
+    a=d.get('a')
+    a+= 1
+    d.update({'a': a})
+x = threading.Thread(target=p)
+y = threading.Thread(target=p)
+x.start()
+y.start()
+print(d)
 # def daemon():
 #     logging.debug('Starting')
 #     time.sleep(2)
@@ -53,16 +63,6 @@ print(re.findall(r'[^#]*(?=#)', 'ban_menu#627784637#abusive_behavior'))
 
 # d = threading.Thread(name='daemon', target=daemon)
 # d.setDaemon(True)
-
-# def non_daemon():
-#     logging.debug('Starting')
-#     for i in range(20):
-#         logging.debug(i)
-#         time.sleep(0.1)
-#     logging.debug('Exiting')
-#     while True:
-#         pass
-
 # t = threading.Thread(name='non-daemon', target=non_daemon)
 
 # d.start()
@@ -72,5 +72,5 @@ print(re.findall(r'[^#]*(?=#)', 'ban_menu#627784637#abusive_behavior'))
 #     time.sleep(0.1)
 # d.join()
 
-a = datetime.datetime.strptime(clock.now(), '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(clock.now('+3seconds'), '%Y-%m-%d %H:%M:%S')
-print(a.total_seconds())
+# a = datetime.datetime.strptime(clock.now(), '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(clock.now('+3seconds'), '%Y-%m-%d %H:%M:%S')
+# print(a.total_seconds())

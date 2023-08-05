@@ -1,6 +1,6 @@
 import logging
 import telebot
-from base import Base
+from base import getBase, Profiles, Orders, Files 
 from exceptor import Exceptor
 from phrases import tell
 from phrases import language_codes
@@ -27,21 +27,21 @@ def uknw(func):
     return protected
 
 
-
-
 class GeorgeBot(telebot.TeleBot):
-    def __init__(self, token, u_d, o_d):
-        telebot.TeleBot.__init__(self, token)
-        self.files_data = Base('f')
-        self.users_data: Base = u_d
-        self.orders_data: Base = o_d
+    def __init__(self, token, u_d:Profiles, o_d:Orders):
+        telebot.TeleBot.__init__(self, token, num_threads=50)
+        files_data:Files = getBase("Files")
+        self.download_buffer = Buffer()
+        self.files_data = files_data
+        self.users_data = u_d
+        self.orders_data = o_d
         self.months = ['month', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
         self.weekdays = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
     
 
     def access(self, access_lvl:int=0, /, page_type:str=None, shadow=False):
         if page_type != None:
-            access_lvl = 4
+            access_lvl = 8
         def decorator(func):
             def protected(*args, **kwargs):
                 message: telebot.types.Message|telebot.types.CallbackQuery
@@ -67,6 +67,7 @@ class GeorgeBot(telebot.TeleBot):
                     case _:
                         return
                 denied = False
+                kwargs.update({'user': user})
                 if lvl >= access_lvl:
                     return func(*args, **kwargs)
                 match type(message):
@@ -190,7 +191,7 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(*[button(tell(self.months[month], lang), callback_data=f"calendary#{year}-{month}#{note}") \
                            for month in range(1, 13)])
                 date = f'{year}-99-99 99:99'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -254,7 +255,7 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(*row)
                 date = f'{year:02}-{month:02}-99 99:99'
                 menu.add(button(tell("select_datetime", lang, inset={'date': date}), 
-                                callback_data=f"deadline#{order_id}#{date}"))
+                                callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -276,7 +277,7 @@ class GeorgeBot(telebot.TeleBot):
                     menu.add(*
                         [set_hour(hour) for hour in range(line*6, line*6+6)])
                 date = f'{year}-{month:02}-{day:02} 99:99'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -300,7 +301,7 @@ class GeorgeBot(telebot.TeleBot):
                     menu.add(*
                         [set_minute(minute) for minute in range(line*6, line*6+6)])
                 date = f'{year}-{month:02}-{day:02} {hour:02}:99'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
@@ -326,7 +327,7 @@ class GeorgeBot(telebot.TeleBot):
                 dwHour = f"calendary#{clock.get_dateline(date_time-clock.datetime.timedelta(hours=1))[:-3]}#{note}"
                 upMin = f"calendary#{clock.get_dateline(date_time+clock.datetime.timedelta(minutes=1))[:-3]}#{note}"
                 dwMin = f"calendary#{clock.get_dateline(date_time-clock.datetime.timedelta(minutes=1))[:-3]}#{note}"
-                menu.add(button(f"🔼", callback_data=f"calendary#{hour+1}#{note}"),
+                menu.add(button(f"🔼", callback_data=f"calendary#{year+1}-{month}-{day} {hour}:{minute}#{note}"),
                          button(f"🔼", callback_data=upMonth),
                          button(f"🔼", callback_data=upDay),
                          button(f"🔼", callback_data=upHour),
@@ -338,19 +339,19 @@ class GeorgeBot(telebot.TeleBot):
                          button(f"{hour:02}", callback_data=f"calendary#{year}-{month}-{day}#{note}"),
                          button(f":{minute:02}", callback_data=f"calendary#{year}-{month}-{day} {hour}#{note}")
                          )
-                menu.add(button(f"🔽", callback_data=f"calendary#{hour-1}#{note}"),
+                menu.add(button(f"🔽", callback_data=f"calendary#{year-1}-{month}-{day} {hour}:{minute}#{note}"),
                          button(f"🔽", callback_data=dwMonth),
                          button(f"🔽", callback_data=dwDay),
                          button(f"🔽", callback_data=dwHour),
                          button(f"🔽", callback_data=dwMin)
                          )
                 date = f'{year}-{month:02}-{day:02} {hour:02}:{minute:02}'
-                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}"))
+                menu.add(button(tell("select_datetime", lang, inset={'date': date}), callback_data=f"deadline#{order_id}#{date}:99"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 try:
                     msg_id = user.get("msg_id", 0)
                     self.edit_message_reply_markup(ID, msg_id, reply_markup=menu)
-                except:    
+                except:     
                     exc.tracebacking()
                     self.send_message(ID, f"{year}", reply_markup=menu)
             case "confirm_del_files":
@@ -388,11 +389,11 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(button(tell("enter", lang), callback_data=f"enter description {order_id}"))
                 menu.add(button(tell("clear", lang), callback_data=f"del description {order_id}"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
-                desc = order["description"]
+                desc = order["description"][:3500]
                 if not desc:
                     desc = tell("description_desc", lang)
                 else:
-                    desc = f'<code>{desc}</code>'+'\n<i>'+tell('description_disc', lang)+'</i>'
+                    desc = f"<code>{desc}</code>\n<i>({len(desc)}/3500)\n{tell('description_disc', lang)}</i>"
                 text = f"{tell('description_of_order', lang, {'curr': desc})}"
                 self.send_message(ID, text, reply_markup=menu, parse_mode='HTML')
             case "edit_order_menu":
@@ -431,13 +432,30 @@ class GeorgeBot(telebot.TeleBot):
                 msg = self.send_message(ID, text, parse_mode="HTML", reply_markup=menu)
                 self.set_msg_to_del(user, msg)
             case "edit_type_menu":
-                pass
+                if order.get('status') not in {"created", "recreated"}:
+                    self.display(user, "show_order")
+                    return
+                for ser, data in self.get_services().items():
+                    menu.add(button(tell("service_face", 
+                                         lang, 
+                                         inset={
+                                             "serv": ser,
+                                             "price": data.get('min_price')
+                                         }), 
+                                    callback_data=f"switch type {ser}#{order_id}"))
+                menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
+                self.send_message(ID, 
+                                  tell("type_of_order", lang, inset={'curr': tell(f'{order.get("type")}', lang)}), 
+                                  reply_markup=menu)
             case "enter_description_menu":
                 menu.add(self.display(user, "back"))
                 menu.add(self.display(user, "back_to_home"))
                 self.send_fielde(user, "description", order_id, repl=menu)
             case "good_file":
-                self.send_message(ID, tell("good_file", lang, {'file_name': user.get('file_name')}))
+                self.edit_message_text(tell("good_file", lang, {'file_name': user.get('file_name')}),
+                                       user.get('load_cht_id'),
+                                       user.get('load_msg_id')
+                                       )
             case "main_menu":
                 if user['status'] != 'newcomer':
                     menu.add(button(tell('my_orders', lang), callback_data='to my_orders'))
@@ -448,10 +466,35 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(button(tell('settings', lang), callback_data='to settings'))
                 menu.add(button(tell('fitback', lang), callback_data='to fitback'))
                 self.send_message(ID, tell('main_menu', lang), reply_markup=menu)
-            case "my_orders_menu":
-                menu.add(self.display(user, "back"))
+            case "my_orders_menu"|"my_projects_menu":
+                match code:
+                    case "my_orders_menu":
+                        kwargs = {'customer': user}
+                        lc = 'o'
+                    case "my_projects_menu":
+                        kwargs = {'master': user}
+                        lc = 'p'
+                o_dict = self.get_orders(**kwargs)
+                stat_list = ['accepted', 'proposed', 'distributed', 'drafts', 'archive']
+                opened_code = user.get('selected', 0)
+                l = len(stat_list)
+                opened= f"{'0'*l}{bin(opened_code)[2:]}"[-l:]
+                for i, stat in enumerate(stat_list):
+                    id_list = o_dict.get(stat)
+                    if not id_list:
+                        continue
+                    t = {'0':'▶️', '1':'🔽'}.get(opened[i])
+                    select = opened_code ^ 2**(l-i-1)
+                    menu.add(button(f"{t}{stat.upper()}", callback_data=f"s|m{lc}|{select}"))
+                    if t=='🔽':
+                        for o_id in id_list:
+                            menu.add(button(o_id, callback_data=f'to edit_order#{o_id}'))
+                menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
                 text = f"{tell('my_orders', lang)}\n\n{tell('my_orders_desc', lang)}"
-                self.send_message(ID, text, parse_mode="HTML")
+                if msg_id:=user.get('msg_id'):
+                    self.edit_message_reply_markup(ID, msg_id, reply_markup=menu)
+                else:
+                    self.send_message(ID, text, reply_markup=menu, parse_mode="HTML")
             case "settings_menu":
                 menu.add(button(tell("profile", lang), callback_data="to profile"))
                 menu.add(button(tell("language", lang), callback_data="to language"))
@@ -493,7 +536,7 @@ class GeorgeBot(telebot.TeleBot):
                 f_info:dict
                 for i, item in enumerate(sorted(reference.items())):
                     f_id, f_info = item
-                    f_name = f_info.get("f_name", f'file{i}')
+                    f_name = f_info.get("name", f'file{i}')
                     select = select_code ^ 2**(l-i-1)
                     menu.add(button('❌'*(selected[i] == '1')+f_name, callback_data=f"s|rd|{select}"))
                 optional_line = []
@@ -512,10 +555,16 @@ class GeorgeBot(telebot.TeleBot):
             case "reference_viewer":
                 reference:dict = order.get("reference", {})
                 for f_id, f_info in reference.items():
-                    f_name = f_info.get('f_name')
+                    f_name = f_info.get('name', 'unknow file')
                     menu.add(button(f_name, callback_data=f"to file#{order_id}#r#{f_id}"))
                 menu.add(*[self.display(user, "back"), self.display(user, "back_to_home")])
-                self.send_message(ID, tell("reference_viewer", lang, inset={'loc': tell("reference_of_order", lang, ignore_all_insets=True)}), reply_markup=menu)
+                self.send_message(ID, 
+                                  tell("reference_viewer", 
+                                       lang, 
+                                       inset={'loc': tell("reference_of_order", 
+                                                          lang, 
+                                                          ignore_all_insets=True)}), 
+                                  reply_markup=menu)
             case "view_file":
                 f_id, loc = user.get('f_id'), user.get('f_loc')
                 folder:dict = order.get(loc)
@@ -523,7 +572,7 @@ class GeorgeBot(telebot.TeleBot):
                 if user['status'] in {'god', 'master', 'foreman'} or order['status'] == 'created':
                     menu.add(button(tell("delete_file", lang), callback_data=f"del file {order_id} r {f_id}"))
                 menu.add(self.display(user, "back"))
-                self.send_document(ID, **file_info, reply_markup=menu)
+                self.send_document(ID, **file_info, reply_markup=menu, protect_content=True)
             case "unknw_des":
                 menu.add(self.display(user, "back"))
                 menu.add(self.display(user, "back_to_home"))
@@ -567,7 +616,7 @@ class GeorgeBot(telebot.TeleBot):
                 return "language_codes"
     
 
-    def document_download(self, message: telebot.types.Message, folder_path) -> tuple[str, dict]:
+    def document_download(self, message: telebot.types.Message, user:dict, folder_path) -> tuple[str, dict]:
         try:
             document:telebot.types.Document = getattr(message, "document", None)
             audio: telebot.types.Audio = getattr(message, "audio", None)
@@ -575,19 +624,23 @@ class GeorgeBot(telebot.TeleBot):
                 document = audio
             file_info = self.get_file(document.file_id)
             file_bytes = self.download_file(file_info.file_path)
-            file_name = document.file_name
-            # file_decoded = str(file_bytes, encoding='ISO-8859-1')
-            path = folder_path + file_name
             file = {
-                'order_id': path[:path.find('/')],
-                'path': path,
-                'bytes': file_bytes
+                'tg_id': document.file_id,
+                'name': document.file_name,
+                'folder': folder_path,
+                'bytes': file_bytes,
             }
-            ID = self.files_data.upload_file(file)
-            file_info = {"f_name":file_name, "tg_id": document.file_id}
-            return ID, file_info
+            ID = self.files_data.download_file(file)
+            if ID is None:
+                raise Exception("File doesn`t downloaded")
+            user.update({"file_name": file.get('name')})
+            self.display(user, "good_file")
+            return file_info
         except Exception as e:
-            self.reply_to(message, e)
+            self.edit_message_text(e, user.get('load_cht_id'), user.get('load_msg_id'))
+        finally:
+            # self.delete_message(user.get('load_cht_id'), user.get('load_msg_id'))
+            self.download_buffer.remove(user.get('load_cht_id'))
 
     def document_upload(self, file_info:dict, f_id) -> str|bytes:
         try:
@@ -596,8 +649,38 @@ class GeorgeBot(telebot.TeleBot):
             return {'document': tg_id}
         except:
             f_name = file_info.get('f_name')
-            file = self.files_data.download_file(f_id)
+            file = self.files_data.upload_file(f_id)
             return {'document': file, 'visible_file_name': f_name}
+    
+    @exc.protect
+    def get_orders(self, /, customer:dict=None, master:dict=None)->dict:
+        if customer is not None:
+            c_id = customer.get('id')
+            cust_orders = self.orders_data.search(c_id, ('customer',)).get('whole')['']
+            id_set = set(cust_orders)
+        if master is not None:
+            m_id = master.get('id')
+            mast_orders = self.orders_data.search(c_id, ('master',)).get('whole')['']
+            id_set = set(mast_orders)
+        if master and customer:
+            id_set = set(cust_orders) & set(mast_orders)
+        id_dict = {}
+        for stat in self.orders_data.status_list:
+            id_dict.update({stat: self.orders_data.search(stat, ('status',)).get('whole')['']})
+        id_dict.update({"drafts": id_dict.pop('created') + id_dict.pop('recreated')})
+        id_dict.update({"archive": id_dict.pop('closed')+id_dict.pop('completed')})
+        for stat, id_list in id_dict.items():
+            id_dict.update({stat: sorted(id_set & set(id_list), 
+                                         key=lambda x: self.orders_data.peek(x, '_status_updated'),
+                                         reverse=True)})
+        return id_dict
+
+
+    
+    @exc.protect
+    def get_services(self)->dict:
+        with open("services.json", 'rb') as f:
+            return json.load(f)
 
     @exc.protect
     def set_msg_to_del(self, user:dict, message:telebot.types.Message) -> None:
@@ -611,29 +694,22 @@ class GeorgeBot(telebot.TeleBot):
 
     def document_handler(self, message:telebot.types.Message, user:dict, path_end:str) -> None:
         loc, order_id, chat_id, msg_id = (path_end.split('#') + [None]*3)[:4]
+        msg = self.reply_to(message, tell("downloading", user.get('language_code')))
+        load_cht_id, load_msg_id = msg.chat.id, msg.id
+        user.update({'load_cht_id': load_cht_id, 'load_msg_id': load_msg_id})
         match loc:
             case "reference_of_order":
-                add_on = self.document_download(message, f"{order_id}/reference/")
-                if add_on is None:
-                    return
-                add_on_id, add_on_info = add_on
-                documents: dict = self.orders_data.fetch(order_id).get('reference', {})
-                documents.update({add_on_id: add_on_info})
-                # documents = json.dumps(documents).encode('ISO-8859-1')
-                documents = json.dumps(documents).encode('utf-8')
-                request = {"reference": documents}
-                func = self.orders_data.update_order
+                self.document_download(message,user, f"{order_id}/reference")
                 display_code = "edit_reference_menu"
             case _:
                 return
-        func(order_id, request)
-        user.update({'file_name': add_on_info.get("f_name", 'unnknow file_name')})
-        self.display(user, 'good_file') 
-        try:
-            self.delete_message(chat_id, msg_id)
-            self.display(user, display_code)
-        except:
-            pass
+        if self.download_buffer.get(message.chat.id) <= 0:
+            try:
+                self.delete_message(chat_id, msg_id)
+                self.display(user, display_code)
+                logger.debug("FINAL")
+            except:
+                pass
 
 
     def text_handler(self, message:telebot.types.Message, user: dict, path_end: str):
@@ -706,7 +782,7 @@ class GeorgeBot(telebot.TeleBot):
                     message_id = message.id - 1
                 match obj:
                     case "description":
-                        request = {'description': message.text}
+                        request = {'description': message.text[:3500]}
                         func = self.orders_data.update_order
         func(ID, request)
         self.delete_message(chat_id, message_id)
@@ -766,11 +842,11 @@ class GeorgeBot(telebot.TeleBot):
     def get_user(self, message: telebot.types.Message|telebot.types.CallbackQuery) -> dict:
         ID = message.from_user.id
         user = self.users_data.fetch(ID)
-        if user['sys_lang']:
+        if bool(user.get('sys_lang')):
             lang = message.from_user.language_code
             if lang != user['language_code']:
                 self.users_data.update_profile(ID, request={'language_code': lang})
-                user['language_code'] = lang
+                user.update({'language_code':lang})
         return user    
 
 
@@ -830,3 +906,12 @@ class GeorgeBot(telebot.TeleBot):
                 text = message.text
         sintax = text.split()
         com, args = sintax[0], sintax[1:]
+
+class Buffer(dict):
+    def remove(self, chat_id):
+        dict.update(self, {chat_id: self.get(chat_id, 0)-1})
+        logger.debug(f'{self.get(chat_id)}(-1)')
+
+    def update(self, chat_id):
+        dict.update(self, {chat_id: self.get(chat_id, 0)+1})
+        logger.debug(f'{self.get(chat_id)}(+1)')
