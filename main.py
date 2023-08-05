@@ -324,8 +324,8 @@ update_presets - update (create if not exist) bot_presets.json
         
         @bot.message_handler(commands=['ban'])
         @bot.access(8)
-        def ban(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def ban(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             command, *args = message.text.split() + [None]
             ID = args[0]
             if not self.users_data.verify(ID):
@@ -339,8 +339,8 @@ update_presets - update (create if not exist) bot_presets.json
         
         @bot.callback_query_handler(func=lambda call: call.data[:3] == 'ban')
         @bot.access(8)
-        def ban_menu(call: telebot.types.CallbackQuery):
-            user = bot.get_user(call)
+        def ban_menu(call: telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(call))
             target_id, br = call.data.split('#')[1:]
             bot.set_nav(f'ban_menu#{target_id}#{br}', user, type(call))
             match br:
@@ -360,8 +360,8 @@ update_presets - update (create if not exist) bot_presets.json
         
         @bot.message_handler(commands=['report'])
         @bot.access(2)
-        def report(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def report(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             command, *args = message.text.split() + [None]
             ID = args[0]
             if not self.users_data.verify(ID):
@@ -393,7 +393,7 @@ update_presets - update (create if not exist) bot_presets.json
 
         @bot.callback_query_handler(func=lambda call: 'to ' in call.data)
         @bot.access()
-        def navigation(call: telebot.types.CallbackQuery):
+        def navigation(call: telebot.types.CallbackQuery, **kwargs):
             try:
                 bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             except:
@@ -570,22 +570,32 @@ update_presets - update (create if not exist) bot_presets.json
             user:dict = bot.get_user(call)
             err = False
             match data[1]:
+                case "type":
+                    order_type, order_id = data[2].split('#')
+                    request = {
+                        "type": order_type
+                    }
                 case "sys_lang":
                     request = {
                         "nav": user['nav']+'/swt',
                         "sys_lang": 1, 
-                        "language_code": call.data.from_user.language_code
+                        "language_code": call.from_user.language_code
                     }
                 case "language":
                     lang = data[-1]
-                    request = {"language_code": lang, "nav": user['nav']+'/swt'}
+                    request = {"language_code": lang, "nav": user['nav']+'/swt', "sys_lang": 0}
                 case _:
                     err = True
                     unknow_destination(call)
             if not err:
-                users_data.update_profile(user['id'], request)
-                user.update(request)
-                bot.display(user, "switch")
+                match data[1]:
+                    case "sys_lang"|"language":
+                        users_data.update_profile(user['id'], request)
+                        user.update(request)
+                        bot.display(user, "switch")
+                    case "type":
+                        orders_data.update_order(int(order_id), request)
+                        bot.display(user, "edit_type_menu")
         
         @bot.callback_query_handler(func=lambda call: 'del ' in call.data)
         def delete(call: telebot.types.CallbackQuery):
@@ -655,7 +665,7 @@ update_presets - update (create if not exist) bot_presets.json
         @bot.callback_query_handler(func=lambda call: 's|' in call.data)
         def select(call:telebot.types.CallbackQuery):
             data = call.data.split('|')
-            select_list = {'rd': "reference_deleter"}
+            select_list = {'rd': "reference_deleter", 'mo': "my_orders_menu", 'mp': "my_projects_menu"}
             loc = data[1]
             location = select_list.get(loc)
             select_code = int(data[-1])
@@ -694,14 +704,14 @@ update_presets - update (create if not exist) bot_presets.json
         
         @bot.message_handler(commands=['new'])
         @bot.access()
-        def my_orders(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def my_orders(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             user = bot.set_nav(f"my_orders", user, type(message))
             bot.display(user, "my_orders_menu")
         
         @bot.message_handler(commands=['description'])
         @bot.access()
-        def edit_description(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_description(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -709,7 +719,7 @@ update_presets - update (create if not exist) bot_presets.json
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             if order.get('status', None) == 'created':
@@ -721,15 +731,15 @@ update_presets - update (create if not exist) bot_presets.json
 
         @bot.message_handler(commands=['new'])
         @bot.access()
-        def new_order(message: telebot.types.Message|telebot.types.CallbackQuery):
-            user = bot.get_user(message)
+        def new_order(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
+            user = kwargs.get('user', bot.get_user(message))
             order_id = bot.new_order(user)
             user = bot.set_nav(f"edit_order#{order_id}", user, type(message))
             bot.display(user, "edit_order_menu")
         
         @bot.message_handler(commands=['edit'])
         @bot.access(page_type='edit_order')
-        def edit_order(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_order(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -737,7 +747,7 @@ update_presets - update (create if not exist) bot_presets.json
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             if order.get('status', None) == 'created':
@@ -749,7 +759,7 @@ update_presets - update (create if not exist) bot_presets.json
         
         @bot.message_handler(commands=['references'])
         @bot.access()
-        def edit_references(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_references(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -757,7 +767,7 @@ update_presets - update (create if not exist) bot_presets.json
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             user = bot.set_nav(f"reference_of_order#{order_id}", user, type(message))
@@ -765,7 +775,7 @@ update_presets - update (create if not exist) bot_presets.json
         
         @bot.message_handler(commands=['type'])
         @bot.access()
-        def edit_type(message: telebot.types.Message|telebot.types.CallbackQuery):
+        def edit_type(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             match type(message):
                 case telebot.types.Message:
                     sep = ' '
@@ -773,7 +783,7 @@ update_presets - update (create if not exist) bot_presets.json
                 case telebot.types.CallbackQuery:
                     sep = '#'
                     text = message.data
-            user = bot.get_user(message)
+            user = kwargs.get('user', bot.get_user(message))
             order_id = text.split(sep)[-1]
             order = self.orders_data.fetch(order_id)
             if order.get('status', None) == 'created':
@@ -809,6 +819,7 @@ update_presets - update (create if not exist) bot_presets.json
         
         @bot.message_handler(content_types=CONTENT_TYPES)
         def content_handler(message: telebot.types.Message):
+            bot.download_buffer.update(message.chat.id)
             user:dict = bot.get_user(message)
             if user is None:
                 bot.send_message(message.from_user.id, "Unknow user id error. Maybe profile has been deleted, please press or write /start to LOG IN")

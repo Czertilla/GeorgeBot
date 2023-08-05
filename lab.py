@@ -35,10 +35,21 @@ import logging
 #                     format='(%(threadName)-10s) %(message)s',
 #                     )
 import logging.config
-
+users = base.Profiles
+orders = base.Orders
 # bot = GeorgeBot("5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0", users, orders)
 
+d = {'a':0}
 
+def p():
+    a=d.get('a')
+    a+= 1
+    d.update({'a': a})
+x = threading.Thread(target=p)
+y = threading.Thread(target=p)
+x.start()
+y.start()
+print(d)
 # def daemon():
 #     logging.debug('Starting')
 #     time.sleep(2)
@@ -52,30 +63,6 @@ import logging.config
 
 # d = threading.Thread(name='daemon', target=daemon)
 # d.setDaemon(True)
-
-
-execute = base.MetaBase.BasicBase.execute
-
-a = re.sub(r'(?<=\(| )[^(),]*(?=\)|,)', '?', '(id, tg_id, f_name, path, order_id, bytes)')
-print(a)
-
-
-
-
-
-
-
-
-
-
-class A:
-    a = 0
-
-b = A()
-c = b.a
-A.a = 1
-print(c)
-print(b.a)
 # t = threading.Thread(name='non-daemon', target=non_daemon)
 
 # d.start()

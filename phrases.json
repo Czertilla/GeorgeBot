@@ -170,6 +170,10 @@
         "en": "❌ discard profile",
         "ru": "❌ Удалить профиль"
     },
+    "downloading": {
+        "en": "⏳ Downloading file",
+        "ru": "⏳ Загрузка файла"
+    },
     "draft": {
         "en": "📝 Draft Order No.<code><id></code>",
         "ru": "📝 Черновик заказа №<code><id></code>"
@@ -196,6 +200,10 @@
     "reference_viewer": {
         "en": "🗂 Files from folder : <loc>",
         "ru": "🗂 Файлы из папки : <loc>"
+    },
+    "service_face": {
+        "en": "<serv> - from <price> ₽",
+        "ru": "<serv> - от <price> ₽"
     },
     "good_file": {
         "en": "✅ - <file_name>"

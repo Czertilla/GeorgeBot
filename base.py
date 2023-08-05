@@ -478,9 +478,24 @@ class Logs(MetaBase.BasicBase, metaclass=MetaBase):
 class Orders(MetaBase.BasicBase, metaclass=MetaBase):
     def __init__(self)->None:
         super().__init__()
+        self.status_list = ['created', 
+                            'distributed', 
+                            'proposed',
+                            'accepted',
+                            # 'unpaid',
+                            # 'paid',
+                            'completed',
+                            'recreated',
+                            'closed']
         self._set_anchor("reference", "Files")
         self._set_anchor("_logging", "Logs")
         # self._set_anchor("product", "Files")
+    
+    def peek(self, ID, column):
+        if column not in self.columns:
+            return
+        result = self.execute(f"SELECT {column} FROM {self.tname} WHERE {self._rowid}=?", (ID, ))
+        return result.fetchone()[0]
 
     def new_order(self, user:dict) -> int:
         ID = random.randint(100000000, 999999999)

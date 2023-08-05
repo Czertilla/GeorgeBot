@@ -19162,3 +19162,1656 @@ TypeError: get_datetime() missing 1 required positional argument: 'line'
 2023-08-02 04:34:54 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#893510985
 2023-08-02 04:35:06 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#893510985/type_of_order#893510985
 2023-08-02 04:35:09 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#893510985
+2023-08-02 04:38:48 INFO:__main__> a.2.0bmr87============ session started =======================
+2023-08-02 04:38:55 INFO:__main__> bot presets has been edited. to make the changes take effect, make a restart program
+2023-08-02 04:47:38 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 04:47:41 INFO:__main__> thread m was started
+2023-08-02 04:47:41 DEBUG:__main__> polling right now
+2023-08-02 04:47:41 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	Bot token is not defined
+2023-08-02 04:47:41 INFO:__main__> thread s was started
+2023-08-02 04:47:41 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 834, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1040, in polling
+    logger.info('Starting your bot with username: [@%s]', self.user.username)
+                                                          ^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 273, in user
+    self._user = self.get_me()
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1236, in get_me
+    result = apihelper.get_me(self.token)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 196, in get_me
+    return _make_request(token, method_url)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 80, in _make_request
+    raise Exception('Bot token is not defined')
+Exception: Bot token is not defined
+
+2023-08-02 04:47:41 WARNING:__main__> need a restart
+2023-08-02 04:47:41 ERROR:Gbot> fatal_warning function crushed by: 
+	Bot token is not defined
+2023-08-02 04:47:41 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 834, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1040, in polling
+    logger.info('Starting your bot with username: [@%s]', self.user.username)
+                                                          ^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 273, in user
+    self._user = self.get_me()
+                 ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1236, in get_me
+    result = apihelper.get_me(self.token)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 196, in get_me
+    return _make_request(token, method_url)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 80, in _make_request
+    raise Exception('Bot token is not defined')
+Exception: Bot token is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 744, in fatal_warning
+    self.send_message(ID, "Я упал, подними меня!")
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1549, in send_message
+    apihelper.send_message(
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 264, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 80, in _make_request
+    raise Exception('Bot token is not defined')
+Exception: Bot token is not defined
+
+2023-08-02 04:47:41 WARNING:__main__> restarts left: -1
+2023-08-02 04:48:51 INFO:__main__> bot presets has been edited. to make the changes take effect, make a restart program
+2023-08-02 04:48:55 INFO:__main__> closing process:
+2023-08-02 04:48:55 INFO:__main__> |	thread m:
+2023-08-02 04:48:55 INFO:__main__> |	|	closed.
+2023-08-02 04:48:55 INFO:__main__> |	thread s:
+2023-08-02 04:48:55 DEBUG:schedule> |	|	3cd2e26e-58cd-4659-93bd-311573adfb12 timer closed
+2023-08-02 04:48:55 INFO:__main__> |	|	closed.
+2023-08-02 04:48:55 INFO:__main__> ====================== session comleted ======================
+2023-08-02 04:49:02 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 04:49:05 DEBUG:__main__> polling right now
+2023-08-02 04:49:05 INFO:__main__> thread m was started
+2023-08-02 04:49:05 INFO:__main__> thread s was started
+2023-08-02 05:26:22 DEBUG:base> UPDATE profiles WHERE id = 627784637 SET status = simple
+2023-08-02 05:26:22 DEBUG:base> UPDATE profiles WHERE id = 627784637 SET _unban_date = None
+2023-08-02 05:26:22 DEBUG:schedule> event 3cd2e26e-58cd-4659-93bd-311573adfb12 completed
+2023-08-02 05:26:22 DEBUG:base> UPDATE events WHERE id = 3cd2e26e-58cd-4659-93bd-311573adfb12 SET done = 1
+2023-08-02 05:44:07 INFO:__main__> closing process:
+2023-08-02 05:44:07 INFO:__main__> |	thread m:
+2023-08-02 05:44:17 INFO:__main__> |	|	closed.
+2023-08-02 05:44:17 INFO:__main__> |	thread s:
+2023-08-02 05:44:17 INFO:__main__> |	|	closed.
+2023-08-02 05:44:17 INFO:__main__> ====================== session comleted ======================
+2023-08-02 18:10:50 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 18:10:59 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 18:11:01 INFO:__main__> thread m was started
+2023-08-02 18:11:14 DEBUG:__main__> polling right now
+2023-08-02 18:11:14 INFO:__main__> thread s was started
+2023-08-02 18:11:14 DEBUG:base> UPDATE events WHERE id = 3cd2e26e-58cd-4659-93bd-311573adfb12 SET active = 0
+2023-08-02 18:14:09 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 19:09:25 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 19:09:28 INFO:__main__> thread m was started
+2023-08-02 19:09:28 DEBUG:__main__> polling right now
+2023-08-02 19:09:28 INFO:__main__> thread s was started
+2023-08-02 19:09:57 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/unknw_des
+2023-08-02 19:10:00 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 19:24:20 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings
+2023-08-02 19:24:22 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/profile
+2023-08-02 19:28:24 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/profile/del_profile
+2023-08-02 19:28:37 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/profile
+2023-08-02 19:28:43 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings
+2023-08-02 19:28:54 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 19:29:03 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 19:29:05 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings
+2023-08-02 19:29:06 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 19:29:08 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	'str' object has no attribute 'from_user'
+2023-08-02 19:29:08 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 834, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1074, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 147, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 6770, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 577, in switch
+    "language_code": call.data.from_user.language_code
+                     ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'from_user'
+
+2023-08-02 19:29:08 WARNING:__main__> need a restart
+2023-08-02 19:29:09 WARNING:__main__> restarts left: -1
+2023-08-02 20:45:57 INFO:__main__> thread m was started
+2023-08-02 20:45:57 DEBUG:__main__> polling right now
+2023-08-02 20:45:57 INFO:__main__> thread s was started
+2023-08-02 20:46:04 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 20:46:06 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings
+2023-08-02 20:48:13 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 20:49:32 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	'str' object has no attribute 'from_user'
+2023-08-02 20:49:32 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 834, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1074, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 147, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 6770, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 577, in switch
+    "language_code": call.data.from_user.language_code
+                     ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'from_user'
+
+2023-08-02 20:49:32 WARNING:__main__> need a restart
+2023-08-02 20:49:32 WARNING:__main__> restarts left: -1
+2023-08-02 20:49:54 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 20:49:55 INFO:__main__> thread m was started
+2023-08-02 20:49:55 DEBUG:__main__> polling right now
+2023-08-02 20:49:55 INFO:__main__> thread s was started
+2023-08-02 20:49:59 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 20:50:03 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings
+2023-08-02 20:50:08 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 20:54:42 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 20:54:43 INFO:__main__> thread m was started
+2023-08-02 20:54:43 DEBUG:__main__> polling right now
+2023-08-02 20:54:43 INFO:__main__> thread s was started
+2023-08-02 20:54:47 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 20:54:49 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings
+2023-08-02 20:55:14 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 20:55:38 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language/swt
+2023-08-02 20:55:38 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET sys_lang = 1
+2023-08-02 20:55:38 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET language_code = ru
+2023-08-02 20:57:24 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 20:57:34 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET language_code = en
+2023-08-02 20:57:34 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language/swt
+2023-08-02 20:57:34 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET sys_lang = 0
+2023-08-02 20:57:38 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 20:57:39 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language/swt
+2023-08-02 20:57:39 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET sys_lang = 1
+2023-08-02 20:57:39 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET language_code = ru
+2023-08-02 20:57:41 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/settings/language
+2023-08-02 21:04:46 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 21:04:51 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 21:05:06 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-02 22:01:59 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 22:02:01 INFO:__main__> thread m was started
+2023-08-02 22:02:01 DEBUG:__main__> polling right now
+2023-08-02 22:02:01 INFO:__main__> thread s was started
+2023-08-02 22:02:02 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	Admin.__main.<locals>.navigation() got an unexpected keyword argument 'user'
+2023-08-02 22:02:02 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 834, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1074, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 147, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 6770, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 71, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Admin.__main.<locals>.navigation() got an unexpected keyword argument 'user'
+
+2023-08-02 22:02:02 WARNING:__main__> need a restart
+2023-08-02 22:02:02 WARNING:__main__> restarts left: -1
+2023-08-02 22:03:01 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 22:03:03 INFO:__main__> thread m was started
+2023-08-02 22:03:03 DEBUG:__main__> polling right now
+2023-08-02 22:03:03 INFO:__main__> thread s was started
+2023-08-02 22:03:05 DEBUG:base> INSERT INTO orders new_order with id = 791591926
+2023-08-02 22:03:05 DEBUG:base> UPDATE orders WHERE id = 791591926 SET status = created
+2023-08-02 22:03:05 DEBUG:base> UPDATE orders WHERE id = 791591926 SET _status_updated = 2023-08-02 22:03:05
+2023-08-02 22:03:05 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-02 22:03:08 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-02 22:03:08 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5045
+2023-08-02 22:04:10 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5048
+2023-08-02 22:04:26 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5048/reference_viewer#791591926
+2023-08-02 22:04:28 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5048/reference_viewer#791591926/file#791591926
+2023-08-02 22:05:33 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5048/reference_viewer#791591926
+2023-08-02 22:05:35 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-02 22:05:35 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5052
+2023-08-02 22:05:56 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5055
+2023-08-02 23:06:27 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:06:28 INFO:__main__> thread m was started
+2023-08-02 23:06:28 DEBUG:__main__> polling right now
+2023-08-02 23:06:28 INFO:__main__> thread s was started
+2023-08-02 23:07:34 ERROR:Gbot> display function crushed by: 
+	A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+2023-08-02 23:07:35 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 441, in display
+    self.edit_message_text(tell("good_file", lang, {'file_name': user.get('file_name')}),
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3826, in edit_message_text
+    result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1320, in edit_message_text
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+
+2023-08-02 23:07:35 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	Buffer.remove() missing 1 required positional argument: 'message_id'
+2023-08-02 23:07:55 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:07:59 INFO:__main__> thread m was started
+2023-08-02 23:07:59 DEBUG:__main__> polling right now
+2023-08-02 23:07:59 INFO:__main__> thread s was started
+2023-08-02 23:14:41 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:14:43 INFO:__main__> thread m was started
+2023-08-02 23:14:43 DEBUG:__main__> polling right now
+2023-08-02 23:14:43 INFO:__main__> thread s was started
+2023-08-02 23:15:01 ERROR:Gbot> display function crushed by: 
+	A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+2023-08-02 23:15:01 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 441, in display
+    self.edit_message_text(tell("good_file", lang, {'file_name': user.get('file_name')}),
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3826, in edit_message_text
+    result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1320, in edit_message_text
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+
+2023-08-02 23:15:40 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5075
+2023-08-02 23:15:51 ERROR:Gbot> display function crushed by: 
+	A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+2023-08-02 23:15:51 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 441, in display
+    self.edit_message_text(tell("good_file", lang, {'file_name': user.get('file_name')}),
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3826, in edit_message_text
+    result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1320, in edit_message_text
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+
+2023-08-02 23:15:58 ERROR:Gbot> display function crushed by: 
+	A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+2023-08-02 23:15:59 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 441, in display
+    self.edit_message_text(tell("good_file", lang, {'file_name': user.get('file_name')}),
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3826, in edit_message_text
+    result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1320, in edit_message_text
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+
+2023-08-02 23:16:01 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5078
+2023-08-02 23:16:18 ERROR:Gbot> display function crushed by: 
+	A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+2023-08-02 23:16:18 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 441, in display
+    self.edit_message_text(tell("good_file", lang, {'file_name': user.get('file_name')}),
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3826, in edit_message_text
+    result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1320, in edit_message_text
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+
+2023-08-02 23:17:32 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:17:34 INFO:__main__> thread m was started
+2023-08-02 23:17:34 DEBUG:__main__> polling right now
+2023-08-02 23:17:34 INFO:__main__> thread s was started
+2023-08-02 23:18:14 ERROR:Gbot> display function crushed by: 
+	A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+2023-08-02 23:18:14 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 441, in display
+    self.edit_message_text(tell("good_file", lang, {'file_name': user.get('file_name')}),
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3826, in edit_message_text
+    result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1320, in edit_message_text
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message to edit not found
+
+2023-08-02 23:28:47 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:28:48 INFO:__main__> thread m was started
+2023-08-02 23:28:48 DEBUG:__main__> polling right now
+2023-08-02 23:28:48 INFO:__main__> thread s was started
+2023-08-02 23:28:57 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	cannot access local variable 'func' where it is not associated with a value
+2023-08-02 23:28:57 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 834, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1074, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 147, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 6770, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 820, in content_handler
+    result = bot.text_handler(message, user, path_end)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 736, in text_handler
+    func(ID, request)
+    ^^^^
+UnboundLocalError: cannot access local variable 'func' where it is not associated with a value
+
+2023-08-02 23:28:57 WARNING:__main__> need a restart
+2023-08-02 23:29:20 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:29:21 INFO:__main__> thread m was started
+2023-08-02 23:29:21 DEBUG:__main__> polling right now
+2023-08-02 23:29:21 INFO:__main__> thread s was started
+2023-08-02 23:36:12 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:36:18 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:36:19 INFO:__main__> thread m was started
+2023-08-02 23:36:19 DEBUG:__main__> polling right now
+2023-08-02 23:36:19 INFO:__main__> thread s was started
+2023-08-02 23:37:21 DEBUG:Gbot> 2
+2023-08-02 23:37:24 DEBUG:Gbot> 2
+2023-08-02 23:39:34 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5104
+2023-08-02 23:42:17 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:42:19 DEBUG:__main__> polling right now
+2023-08-02 23:42:19 INFO:__main__> thread m was started
+2023-08-02 23:42:19 INFO:__main__> thread s was started
+2023-08-02 23:42:27 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5113
+2023-08-02 23:42:28 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5116
+2023-08-02 23:44:48 INFO:__main__> unknow command
+2023-08-02 23:44:54 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:44:56 DEBUG:__main__> polling right now
+2023-08-02 23:44:56 INFO:__main__> thread m was started
+2023-08-02 23:44:56 INFO:__main__> thread s was started
+2023-08-02 23:45:02 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5125
+2023-08-02 23:45:03 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5128
+2023-08-02 23:45:26 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:45:29 DEBUG:__main__> polling right now
+2023-08-02 23:45:29 INFO:__main__> thread m was started
+2023-08-02 23:45:29 INFO:__main__> thread s was started
+2023-08-02 23:45:34 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5136
+2023-08-02 23:45:35 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5140
+2023-08-02 23:46:57 INFO:__main__> unknow command
+2023-08-02 23:47:16 INFO:__main__> thread m was started
+2023-08-02 23:47:16 INFO:__main__> thread s was started
+2023-08-02 23:47:16 DEBUG:__main__> polling right now
+2023-08-02 23:47:21 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5148
+2023-08-02 23:47:22 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5152
+2023-08-02 23:48:59 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:49:02 DEBUG:__main__> polling right now
+2023-08-02 23:49:02 INFO:__main__> thread m was started
+2023-08-02 23:49:02 INFO:__main__> thread s was started
+2023-08-02 23:49:17 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	'Message' object has no attribute 'chat_id'
+2023-08-02 23:49:17 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 835, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1074, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 147, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 6770, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 823, in content_handler
+    bot.document_handler(message, user, path_end)
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 655, in document_handler
+    if self.download_buffer.get(message.chat_id) <= 0:
+                                ^^^^^^^^^^^^^^^
+AttributeError: 'Message' object has no attribute 'chat_id'
+
+2023-08-02 23:49:17 WARNING:__main__> need a restart
+2023-08-02 23:49:18 WARNING:__main__> restarts left: -1
+2023-08-02 23:50:33 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:50:39 DEBUG:__main__> polling right now
+2023-08-02 23:50:39 INFO:__main__> thread m was started
+2023-08-02 23:50:39 INFO:__main__> thread s was started
+2023-08-02 23:50:44 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5173
+2023-08-02 23:50:45 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5176
+2023-08-02 23:51:57 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5183
+2023-08-02 23:52:01 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5186
+2023-08-02 23:54:56 INFO:__main__> unknow command
+2023-08-02 23:54:58 DEBUG:__main__> polling right now
+2023-08-02 23:54:58 INFO:__main__> thread m was started
+2023-08-02 23:54:58 INFO:__main__> thread s was started
+2023-08-02 23:55:33 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5193
+2023-08-02 23:55:34 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5195
+2023-08-02 23:55:35 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5197
+2023-08-02 23:56:57 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:56:58 DEBUG:__main__> polling right now
+2023-08-02 23:56:58 INFO:__main__> thread m was started
+2023-08-02 23:56:58 INFO:__main__> thread s was started
+2023-08-02 23:57:06 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:06 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:08 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:08 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:08 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:08 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5208
+2023-08-02 23:57:08 DEBUG:Gbot> FINAL
+2023-08-02 23:57:08 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:11 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:11 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5211
+2023-08-02 23:57:11 DEBUG:Gbot> FINAL
+2023-08-02 23:57:11 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:12 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:12 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5213
+2023-08-02 23:57:12 DEBUG:Gbot> FINAL
+2023-08-02 23:57:12 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:14 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:14 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:14 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:15 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:15 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5216
+2023-08-02 23:57:15 DEBUG:Gbot> FINAL
+2023-08-02 23:57:15 DEBUG:Gbot> 0(+1)
+2023-08-02 23:57:15 DEBUG:Gbot> 0(-1)
+2023-08-02 23:57:15 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5218
+2023-08-02 23:57:15 DEBUG:Gbot> FINAL
+2023-08-02 23:58:16 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-02 23:58:18 DEBUG:__main__> polling right now
+2023-08-02 23:58:18 INFO:__main__> thread m was started
+2023-08-02 23:58:18 INFO:__main__> thread s was started
+2023-08-02 23:58:25 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:25 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:29 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:29 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:29 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:29 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5229
+2023-08-02 23:58:29 DEBUG:Gbot> FINAL
+2023-08-02 23:58:29 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:33 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:33 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:33 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:33 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5233
+2023-08-02 23:58:34 DEBUG:Gbot> FINAL
+2023-08-02 23:58:34 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:34 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:34 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:35 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:35 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5236
+2023-08-02 23:58:35 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:35 DEBUG:Gbot> FINAL
+2023-08-02 23:58:35 DEBUG:Gbot> 0(+1)
+2023-08-02 23:58:36 DEBUG:Gbot> 0(-1)
+2023-08-02 23:58:36 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5238
+2023-08-02 23:58:36 DEBUG:Gbot> FINAL
+2023-08-03 00:02:46 INFO:__main__> unknow command
+2023-08-03 00:02:55 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 00:02:57 DEBUG:__main__> polling right now
+2023-08-03 00:02:57 INFO:__main__> thread m was started
+2023-08-03 00:02:57 INFO:__main__> thread s was started
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:05 DEBUG:Gbot> 0(+1)
+2023-08-03 00:03:06 DEBUG:Gbot> 0(-1)
+2023-08-03 00:03:07 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5255
+2023-08-03 00:03:07 DEBUG:Gbot> FINAL
+2023-08-03 00:03:07 DEBUG:Gbot> 0(-1)
+2023-08-03 00:03:07 DEBUG:Gbot> 0(-1)
+2023-08-03 00:03:08 DEBUG:Gbot> 0(-1)
+2023-08-03 00:03:08 DEBUG:Gbot> 0(-1)
+2023-08-03 00:03:13 DEBUG:Gbot> 0(-1)
+2023-08-03 00:03:13 DEBUG:Gbot> 0(-1)
+2023-08-03 00:03:13 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:34 INFO:__main__> unknow command
+2023-08-03 00:04:41 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 00:04:42 DEBUG:__main__> polling right now
+2023-08-03 00:04:42 INFO:__main__> thread m was started
+2023-08-03 00:04:42 INFO:__main__> thread s was started
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> CREATE
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:52 DEBUG:Gbot> 0(+1)
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5272
+2023-08-03 00:04:54 DEBUG:Gbot> FINAL
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:54 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:54 DEBUG:Gbot> CREATE
+2023-08-03 00:04:55 DEBUG:Gbot> CREATE
+2023-08-03 00:04:55 DEBUG:Gbot> CREATE
+2023-08-03 00:04:55 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:55 DEBUG:Gbot> CREATE
+2023-08-03 00:04:55 DEBUG:Gbot> CREATE
+2023-08-03 00:04:55 DEBUG:Gbot> CREATE
+2023-08-03 00:04:55 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:55 DEBUG:Gbot> CREATE
+2023-08-03 00:04:59 DEBUG:Gbot> CREATE
+2023-08-03 00:04:59 DEBUG:Gbot> CREATE
+2023-08-03 00:04:59 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:59 DEBUG:Gbot> CREATE
+2023-08-03 00:04:59 DEBUG:Gbot> CREATE
+2023-08-03 00:04:59 DEBUG:Gbot> CREATE
+2023-08-03 00:04:59 DEBUG:Gbot> 0(-1)
+2023-08-03 00:04:59 DEBUG:Gbot> CREATE
+2023-08-03 00:05:01 DEBUG:Gbot> CREATE
+2023-08-03 00:05:01 DEBUG:Gbot> CREATE
+2023-08-03 00:05:01 DEBUG:Gbot> 0(-1)
+2023-08-03 00:05:01 DEBUG:Gbot> CREATE
+2023-08-03 00:09:48 INFO:__main__> unknow command
+2023-08-03 00:09:54 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 00:09:54 DEBUG:__main__> polling right now
+2023-08-03 00:09:54 INFO:__main__> thread m was started
+2023-08-03 00:09:54 INFO:__main__> thread s was started
+2023-08-03 00:10:01 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	unsupported operand type(s) for +: 'NoneType' and 'int'
+2023-08-03 00:10:01 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 835, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1074, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 147, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 6770, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 812, in content_handler
+    bot.download_buffer.update(message.chat.id)
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 865, in update
+    dict.update(self, {chat_id: self.get(chat_id)+1})
+                                ~~~~~~~~~~~~~~~~~^~
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'
+
+2023-08-03 00:10:01 WARNING:__main__> need a restart
+2023-08-03 00:10:01 WARNING:__main__> restarts left: -1
+2023-08-03 00:10:24 INFO:__main__> closing process:
+2023-08-03 00:10:24 INFO:__main__> |	thread m:
+2023-08-03 00:10:25 INFO:__main__> |	|	closed.
+2023-08-03 00:10:25 INFO:__main__> |	thread s:
+2023-08-03 00:10:25 INFO:__main__> |	|	closed.
+2023-08-03 00:10:25 INFO:__main__> ====================== session comleted ======================
+2023-08-03 00:10:41 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 00:10:44 DEBUG:__main__> polling right now
+2023-08-03 00:10:44 INFO:__main__> thread m was started
+2023-08-03 00:10:44 INFO:__main__> thread s was started
+2023-08-03 00:10:50 DEBUG:Gbot> 1(+1)
+2023-08-03 00:10:50 DEBUG:Gbot> 2(+1)
+2023-08-03 00:10:50 DEBUG:Gbot> 3(+1)
+2023-08-03 00:10:50 DEBUG:Gbot> 4(+1)
+2023-08-03 00:10:50 DEBUG:Gbot> 5(+1)
+2023-08-03 00:10:50 DEBUG:Gbot> 6(+1)
+2023-08-03 00:10:50 DEBUG:Gbot> 7(+1)
+2023-08-03 00:10:50 DEBUG:Gbot> 8(+1)
+2023-08-03 00:10:51 DEBUG:Gbot> 7(-1)
+2023-08-03 00:10:52 DEBUG:Gbot> 6(-1)
+2023-08-03 00:10:52 DEBUG:Gbot> 5(-1)
+2023-08-03 00:10:52 DEBUG:Gbot> 4(-1)
+2023-08-03 00:10:54 DEBUG:Gbot> 3(-1)
+2023-08-03 00:10:55 DEBUG:Gbot> 2(-1)
+2023-08-03 00:10:56 DEBUG:Gbot> 1(-1)
+2023-08-03 00:10:57 DEBUG:Gbot> 0(-1)
+2023-08-03 00:10:57 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5299
+2023-08-03 00:10:57 DEBUG:Gbot> FINAL
+2023-08-03 00:13:10 DEBUG:Gbot> 1(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 2(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 3(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 4(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 5(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 6(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 7(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 8(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 9(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 10(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 11(+1)
+2023-08-03 00:13:10 DEBUG:Gbot> 12(+1)
+2023-08-03 00:13:12 DEBUG:Gbot> 11(-1)
+2023-08-03 00:13:12 DEBUG:Gbot> 10(-1)
+2023-08-03 00:13:13 DEBUG:Gbot> 9(-1)
+2023-08-03 00:13:13 DEBUG:Gbot> 8(-1)
+2023-08-03 00:13:13 DEBUG:Gbot> 7(-1)
+2023-08-03 00:13:15 DEBUG:Gbot> 6(-1)
+2023-08-03 00:13:17 DEBUG:Gbot> 5(-1)
+2023-08-03 00:13:18 DEBUG:Gbot> 4(-1)
+2023-08-03 00:13:21 DEBUG:Gbot> 3(-1)
+2023-08-03 00:13:25 DEBUG:Gbot> 2(-1)
+2023-08-03 00:13:25 DEBUG:Gbot> 1(-1)
+2023-08-03 00:13:26 DEBUG:Gbot> 0(-1)
+2023-08-03 00:13:26 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5324
+2023-08-03 00:13:26 DEBUG:Gbot> FINAL
+2023-08-03 00:18:48 INFO:__main__> unknow command
+2023-08-03 00:18:51 INFO:__main__> closing process:
+2023-08-03 00:18:51 INFO:__main__> |	thread m:
+2023-08-03 00:18:53 INFO:__main__> |	|	closed.
+2023-08-03 00:18:53 INFO:__main__> |	thread s:
+2023-08-03 00:18:53 INFO:__main__> |	|	closed.
+2023-08-03 00:18:53 INFO:__main__> ====================== session comleted ======================
+2023-08-03 00:18:55 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 00:19:42 DEBUG:__main__> polling right now
+2023-08-03 00:19:42 INFO:__main__> thread m was started
+2023-08-03 00:19:42 INFO:__main__> thread s was started
+2023-08-03 00:19:42 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5324/reference_viewer#791591926
+2023-08-03 00:19:53 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5324/reference_viewer#791591926/file#791591926
+2023-08-03 00:19:56 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5324/reference_viewer#791591926
+2023-08-03 00:20:14 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:20:15 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328
+2023-08-03 00:20:21 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328/reference_deleter#791591926
+2023-08-03 00:20:44 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328/reference_deleter#791591926/confirm_del_file#791591926#reference#5330#5331#5332#5333#5334#5335#5336#5337#5338#&del files 791591926 r 0593416e-19b3-416a-8994-aa5538ab5e26&del files 791591926 r 27074348-de1c-4858-9802-24ec5fa99376&del files 791591926 r 33ac4de2-a348-4d68-8c64-89d0b5e41d34&del files 791591926 r 39f59a00-cab9-4033-87cd-3cda8079fba3&del files 791591926 r 5b55c3a2-0782-46b4-b48d-b8657693c2b2&del files 791591926 r 62905781-29b5-4b96-a752-5368cb0dee6c&del files 791591926 r 71b28d59-6754-49fb-9400-fcf97843abeb&del files 791591926 r cf7ae486-c83c-48cf-bc2b-9a30cc5397c7&del files 791591926 r e34945d6-66a4-4400-935e-bf0238ce86ac
+2023-08-03 00:21:07 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328/reference_deleter#791591926
+2023-08-03 00:21:25 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328/reference_deleter#791591926/confirm_del_file#791591926#reference#5341#5342#5343#5344#5345#5346#5347#5348#5349#&del files 791591926 r 27074348-de1c-4858-9802-24ec5fa99376&del files 791591926 r 33ac4de2-a348-4d68-8c64-89d0b5e41d34&del files 791591926 r 39f59a00-cab9-4033-87cd-3cda8079fba3&del files 791591926 r 5b55c3a2-0782-46b4-b48d-b8657693c2b2&del files 791591926 r 62905781-29b5-4b96-a752-5368cb0dee6c&del files 791591926 r 71b28d59-6754-49fb-9400-fcf97843abeb&del files 791591926 r cf7ae486-c83c-48cf-bc2b-9a30cc5397c7&del files 791591926 r e34945d6-66a4-4400-935e-bf0238ce86ac&del files 791591926 r fbbca2cc-2eb6-4d10-8168-f9d413c335f5
+2023-08-03 00:21:32 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328/reference_deleter#791591926
+2023-08-03 00:25:06 ERROR:Gbot> display function crushed by: 
+	HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/editMessageReplyMarkup?chat_id=715648962&message_id=5351&reply_markup=%7B%22inline_keyboard%22%3A+%5B%5B%7B%22text%22%3A+%22%5Cu274csddefault.jpg%22%2C+%22callback_data%22%3A+%22s%7Crd%7C4063%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c2023-02-16.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C6111%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cTom+Kaulitz+-+Do+you+wanna+fuck+me.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7135%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cFlosstradamus+ft.+Casino+-+Mosh+Pit+%28Razihel+Remix%29.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7647%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c17-06-2023-11-22.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7903%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cPnevmoslon_-_Strashnyjj_ves_%28musmore.com%29.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8031%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c17-06-2023-11-28.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8095%22%7D%5D%2C+%5B%7B%22text%22%3A+%22Hollywood+Undead+-+Disease.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8191%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cSouth+Faluke+valley.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8143%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c%5Cu043a%5Cu0440%5Cu0443%5Cu0442%5Cu0430%5Cu044f_%5Cu043f%5Cu0435%5Cu0441%5Cu043d%5Cu044f_%5Cu043f%5Cu0440%5Cu043e_%5Cu0432%5Cu0430%5Cu0440%5Cu0444%5Cu0435%5Cu0439%5Cu0441_%5Cu043a%5Cu043b%5Cu0430%5Cu0441%5Cu0441%5Cu043d%5Cu0430%5Cu044f_%5Cu043c%5Cu0443%5Cu0437%5Cu044b%5Cu043a%5Cu0430_%5Cu043f%5Cu043e%5Cu0434_%5Cu0431%5Cu043e%5Cu0438.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8151%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cdem_649e2952194ca.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8155%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c2023-04-17.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8157%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cstiv-dzhobs-2_large.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8158%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu2705+%5Cu0412%5Cu044b%5Cu0431%5Cu0440%5Cu0430%5Cu0442%5Cu044c+%5Cu0432%5Cu0441%5Cu0435%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8191%22%7D%2C+%7B%22text%22%3A+%22%5Cu2611%5Cufe0f+%5Cu0421%5Cu0431%5Cu0440%5Cu043e%5Cu0441%5Cu0438%5Cu0442%5Cu044c+%5Cu0432%5Cu044b%5Cu0431%5Cu043e%5Cu0440%22%2C+%22callback_data%22%3A+%22s%7Crd%7C0%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cud83d%5Cuddd1+%5Cu0423%5Cu0434%5Cu0430%5Cu043b%5Cu0438%5Cu0442%5Cu044c+%5Cu0432%5Cu044b%5Cu0431%5Cu0440%5Cu0430%5Cu043d%5Cu043d%5Cu043e%5Cu0435%22%2C+%22callback_data%22%3A+%22del+sr+8159%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu25c0%5Cufe0f+%5Cu0412%5Cu0435%5Cu0440%5Cu043d%5Cu0443%5Cu0442%5Cu044c%5Cu0441%5Cu044f%3A+%5Cud83e%5Cudde9+%5Cu0420%5Cu0435%5Cu0444%5Cu0435%5Cu0440%5Cu0435%5Cu043d%5Cu0441%5Cu044b+%5Cu0434%5Cu043b%5Cu044f+%5Cu0437%5Cu0430%5Cu043a%5Cu0430%5Cu0437%5Cu0430%3A+%22%2C+%22callback_data%22%3A+%22to+reference_of_order%23791591926%22%7D%2C+%7B%22text%22%3A+%22%5Cu25c0%5Cufe0f%5Cud83c%5Cudfdb%22%2C+%22callback_data%22%3A+%22to+main_menu%22%7D%5D%5D%7D (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x00000241AA4FA8D0>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+2023-08-03 00:25:06 ERROR:exceptor> Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 212, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x00000241AA4FA8D0>, 'Connection to api.telegram.org timed out. (connect timeout=15)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/editMessageReplyMarkup?chat_id=715648962&message_id=5351&reply_markup=%7B%22inline_keyboard%22%3A+%5B%5B%7B%22text%22%3A+%22%5Cu274csddefault.jpg%22%2C+%22callback_data%22%3A+%22s%7Crd%7C4063%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c2023-02-16.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C6111%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cTom+Kaulitz+-+Do+you+wanna+fuck+me.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7135%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cFlosstradamus+ft.+Casino+-+Mosh+Pit+%28Razihel+Remix%29.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7647%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c17-06-2023-11-22.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7903%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cPnevmoslon_-_Strashnyjj_ves_%28musmore.com%29.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8031%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c17-06-2023-11-28.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8095%22%7D%5D%2C+%5B%7B%22text%22%3A+%22Hollywood+Undead+-+Disease.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8191%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cSouth+Faluke+valley.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8143%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c%5Cu043a%5Cu0440%5Cu0443%5Cu0442%5Cu0430%5Cu044f_%5Cu043f%5Cu0435%5Cu0441%5Cu043d%5Cu044f_%5Cu043f%5Cu0440%5Cu043e_%5Cu0432%5Cu0430%5Cu0440%5Cu0444%5Cu0435%5Cu0439%5Cu0441_%5Cu043a%5Cu043b%5Cu0430%5Cu0441%5Cu0441%5Cu043d%5Cu0430%5Cu044f_%5Cu043c%5Cu0443%5Cu0437%5Cu044b%5Cu043a%5Cu0430_%5Cu043f%5Cu043e%5Cu0434_%5Cu0431%5Cu043e%5Cu0438.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8151%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cdem_649e2952194ca.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8155%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c2023-04-17.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8157%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cstiv-dzhobs-2_large.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8158%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu2705+%5Cu0412%5Cu044b%5Cu0431%5Cu0440%5Cu0430%5Cu0442%5Cu044c+%5Cu0432%5Cu0441%5Cu0435%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8191%22%7D%2C+%7B%22text%22%3A+%22%5Cu2611%5Cufe0f+%5Cu0421%5Cu0431%5Cu0440%5Cu043e%5Cu0441%5Cu0438%5Cu0442%5Cu044c+%5Cu0432%5Cu044b%5Cu0431%5Cu043e%5Cu0440%22%2C+%22callback_data%22%3A+%22s%7Crd%7C0%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cud83d%5Cuddd1+%5Cu0423%5Cu0434%5Cu0430%5Cu043b%5Cu0438%5Cu0442%5Cu044c+%5Cu0432%5Cu044b%5Cu0431%5Cu0440%5Cu0430%5Cu043d%5Cu043d%5Cu043e%5Cu0435%22%2C+%22callback_data%22%3A+%22del+sr+8159%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu25c0%5Cufe0f+%5Cu0412%5Cu0435%5Cu0440%5Cu043d%5Cu0443%5Cu0442%5Cu044c%5Cu0441%5Cu044f%3A+%5Cud83e%5Cudde9+%5Cu0420%5Cu0435%5Cu0444%5Cu0435%5Cu0440%5Cu0435%5Cu043d%5Cu0441%5Cu044b+%5Cu0434%5Cu043b%5Cu044f+%5Cu0437%5Cu0430%5Cu043a%5Cu0430%5Cu0437%5Cu0430%3A+%22%2C+%22callback_data%22%3A+%22to+reference_of_order%23791591926%22%7D%2C+%7B%22text%22%3A+%22%5Cu25c0%5Cufe0f%5Cud83c%5Cudfdb%22%2C+%22callback_data%22%3A+%22to+main_menu%22%7D%5D%5D%7D (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x00000241AA4FA8D0>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 514, in display
+    self.edit_message_reply_markup(ID, user.get("msg_id"), reply_markup=menu)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3892, in edit_message_reply_markup
+    result = apihelper.edit_message_reply_markup(self.token, chat_id, message_id, inline_message_id, reply_markup)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1368, in edit_message_reply_markup
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 507, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/editMessageReplyMarkup?chat_id=715648962&message_id=5351&reply_markup=%7B%22inline_keyboard%22%3A+%5B%5B%7B%22text%22%3A+%22%5Cu274csddefault.jpg%22%2C+%22callback_data%22%3A+%22s%7Crd%7C4063%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c2023-02-16.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C6111%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cTom+Kaulitz+-+Do+you+wanna+fuck+me.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7135%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cFlosstradamus+ft.+Casino+-+Mosh+Pit+%28Razihel+Remix%29.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7647%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c17-06-2023-11-22.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C7903%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cPnevmoslon_-_Strashnyjj_ves_%28musmore.com%29.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8031%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c17-06-2023-11-28.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8095%22%7D%5D%2C+%5B%7B%22text%22%3A+%22Hollywood+Undead+-+Disease.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8191%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cSouth+Faluke+valley.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8143%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c%5Cu043a%5Cu0440%5Cu0443%5Cu0442%5Cu0430%5Cu044f_%5Cu043f%5Cu0435%5Cu0441%5Cu043d%5Cu044f_%5Cu043f%5Cu0440%5Cu043e_%5Cu0432%5Cu0430%5Cu0440%5Cu0444%5Cu0435%5Cu0439%5Cu0441_%5Cu043a%5Cu043b%5Cu0430%5Cu0441%5Cu0441%5Cu043d%5Cu0430%5Cu044f_%5Cu043c%5Cu0443%5Cu0437%5Cu044b%5Cu043a%5Cu0430_%5Cu043f%5Cu043e%5Cu0434_%5Cu0431%5Cu043e%5Cu0438.mp3%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8151%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cdem_649e2952194ca.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8155%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274c2023-04-17.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8157%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu274cstiv-dzhobs-2_large.png%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8158%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu2705+%5Cu0412%5Cu044b%5Cu0431%5Cu0440%5Cu0430%5Cu0442%5Cu044c+%5Cu0432%5Cu0441%5Cu0435%22%2C+%22callback_data%22%3A+%22s%7Crd%7C8191%22%7D%2C+%7B%22text%22%3A+%22%5Cu2611%5Cufe0f+%5Cu0421%5Cu0431%5Cu0440%5Cu043e%5Cu0441%5Cu0438%5Cu0442%5Cu044c+%5Cu0432%5Cu044b%5Cu0431%5Cu043e%5Cu0440%22%2C+%22callback_data%22%3A+%22s%7Crd%7C0%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cud83d%5Cuddd1+%5Cu0423%5Cu0434%5Cu0430%5Cu043b%5Cu0438%5Cu0442%5Cu044c+%5Cu0432%5Cu044b%5Cu0431%5Cu0440%5Cu0430%5Cu043d%5Cu043d%5Cu043e%5Cu0435%22%2C+%22callback_data%22%3A+%22del+sr+8159%22%7D%5D%2C+%5B%7B%22text%22%3A+%22%5Cu25c0%5Cufe0f+%5Cu0412%5Cu0435%5Cu0440%5Cu043d%5Cu0443%5Cu0442%5Cu044c%5Cu0441%5Cu044f%3A+%5Cud83e%5Cudde9+%5Cu0420%5Cu0435%5Cu0444%5Cu0435%5Cu0440%5Cu0435%5Cu043d%5Cu0441%5Cu044b+%5Cu0434%5Cu043b%5Cu044f+%5Cu0437%5Cu0430%5Cu043a%5Cu0430%5Cu0437%5Cu0430%3A+%22%2C+%22callback_data%22%3A+%22to+reference_of_order%23791591926%22%7D%2C+%7B%22text%22%3A+%22%5Cu25c0%5Cufe0f%5Cud83c%5Cudfdb%22%2C+%22callback_data%22%3A+%22to+main_menu%22%7D%5D%5D%7D (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x00000241AA4FA8D0>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+
+2023-08-03 00:25:19 DEBUG:__main__> polling right now
+2023-08-03 00:25:19 INFO:__main__> thread m was started
+2023-08-03 00:25:19 INFO:__main__> thread s was started
+2023-08-03 00:25:35 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328/reference_deleter#791591926/confirm_del_file#791591926#reference#5352#5353#5354#5355#5356#5357#5358#5359#5360#5361#5362#5363#&del files 791591926 r 0593416e-19b3-416a-8994-aa5538ab5e26&del files 791591926 r 27074348-de1c-4858-9802-24ec5fa99376&del files 791591926 r 33ac4de2-a348-4d68-8c64-89d0b5e41d34&del files 791591926 r 39f59a00-cab9-4033-87cd-3cda8079fba3&del files 791591926 r 5b55c3a2-0782-46b4-b48d-b8657693c2b2&del files 791591926 r 62905781-29b5-4b96-a752-5368cb0dee6c&del files 791591926 r 71b28d59-6754-49fb-9400-fcf97843abeb&del files 791591926 r b40303b4-71e1-4a51-bb50-954f29348d74&del files 791591926 r c7b8c407-dd94-48f9-a5ba-b83d6412d997&del files 791591926 r cf7ae486-c83c-48cf-bc2b-9a30cc5397c7&del files 791591926 r e34945d6-66a4-4400-935e-bf0238ce86ac&del files 791591926 r fbbca2cc-2eb6-4d10-8168-f9d413c335f5
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = 0593416e-19b3-416a-8994-aa5538ab5e26
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = 27074348-de1c-4858-9802-24ec5fa99376
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = 33ac4de2-a348-4d68-8c64-89d0b5e41d34
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = 39f59a00-cab9-4033-87cd-3cda8079fba3
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = 5b55c3a2-0782-46b4-b48d-b8657693c2b2
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = 62905781-29b5-4b96-a752-5368cb0dee6c
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = 71b28d59-6754-49fb-9400-fcf97843abeb
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = b40303b4-71e1-4a51-bb50-954f29348d74
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = c7b8c407-dd94-48f9-a5ba-b83d6412d997
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = cf7ae486-c83c-48cf-bc2b-9a30cc5397c7
+2023-08-03 00:25:59 DEBUG:base> DELETE FROM files WHERE id = e34945d6-66a4-4400-935e-bf0238ce86ac
+2023-08-03 00:26:00 DEBUG:base> DELETE FROM files WHERE id = fbbca2cc-2eb6-4d10-8168-f9d413c335f5
+2023-08-03 00:26:00 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5328/reference_deleter#791591926
+2023-08-03 00:26:04 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:26:04 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5366
+2023-08-03 00:26:17 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5366/reference_viewer#791591926
+2023-08-03 00:28:16 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:28:16 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5368
+2023-08-03 00:28:18 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 00:28:25 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926
+2023-08-03 00:28:25 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926#715648962#5370
+2023-08-03 00:37:31 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 00:37:33 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:37:33 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5372
+2023-08-03 00:37:51 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 00:38:15 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926
+2023-08-03 00:38:16 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926#715648962#5374
+2023-08-03 00:38:25 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 00:38:30 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:38:30 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5376
+2023-08-03 00:38:33 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 00:38:37 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926
+2023-08-03 00:38:37 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926#715648962#5378
+2023-08-03 00:38:39 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 00:38:41 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:38:41 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5380
+2023-08-03 00:38:42 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 00:38:58 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:38:58 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5382
+2023-08-03 00:39:24 DEBUG:Gbot> 1(+1)
+2023-08-03 00:39:27 DEBUG:Gbot> 0(-1)
+2023-08-03 00:39:27 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5385
+2023-08-03 00:39:27 DEBUG:Gbot> FINAL
+2023-08-03 00:39:57 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 00:40:01 INFO:__main__> thread m was started
+2023-08-03 00:40:01 DEBUG:__main__> polling right now
+2023-08-03 00:40:01 INFO:__main__> thread s was started
+2023-08-03 00:43:20 DEBUG:Gbot> 1(+1)
+2023-08-03 00:44:30 DEBUG:Gbot> 0(-1)
+2023-08-03 00:44:30 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5388
+2023-08-03 00:44:30 DEBUG:Gbot> FINAL
+2023-08-03 00:44:35 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5388/reference_viewer#791591926
+2023-08-03 00:44:37 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5388/reference_viewer#791591926/file#791591926
+2023-08-03 00:44:39 DEBUG:base> DELETE FROM files WHERE id = fcef294f-6afc-444d-8801-bb92b21f4b73
+2023-08-03 00:44:39 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5388/reference_viewer#791591926
+2023-08-03 00:44:42 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926
+2023-08-03 00:44:42 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5392
+2023-08-03 00:45:07 DEBUG:Gbot> 1(+1)
+2023-08-03 01:02:40 DEBUG:Gbot> 0(-1)
+2023-08-03 01:02:40 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/reference_of_order#791591926#715648962#5395
+2023-08-03 01:02:40 DEBUG:Gbot> FINAL
+2023-08-03 01:02:54 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 01:02:57 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926
+2023-08-03 01:02:57 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926#715648962#5397
+2023-08-03 01:04:04 DEBUG:base> UPDATE orders WHERE id = 791591926 SET deadline = 2023-08-03 02:03:99
+2023-08-03 01:04:04 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/edit_deadline_menu#791591926#715648962#5398
+2023-08-03 01:04:07 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 01:10:28 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193439&timeout=20 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438E8C8490>, 'Connection to api.telegram.org timed out. (connect timeout=20)'))
+2023-08-03 01:10:28 ERROR:exceptor> Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 212, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x000002438E8C8490>, 'Connection to api.telegram.org timed out. (connect timeout=20)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193439&timeout=20 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438E8C8490>, 'Connection to api.telegram.org timed out. (connect timeout=20)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 835, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 108, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 507, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193439&timeout=20 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438E8C8490>, 'Connection to api.telegram.org timed out. (connect timeout=20)'))
+
+2023-08-03 01:10:28 WARNING:__main__> need a restart
+2023-08-03 01:10:43 ERROR:Gbot> fatal_warning function crushed by: 
+	HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/sendMessage?chat_id=715648962&text=%D0%AF+%D1%83%D0%BF%D0%B0%D0%BB%2C+%D0%BF%D0%BE%D0%B4%D0%BD%D0%B8%D0%BC%D0%B8+%D0%BC%D0%B5%D0%BD%D1%8F%21 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438FC1A010>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+2023-08-03 01:10:43 ERROR:exceptor> Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 212, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x000002438E8C8490>, 'Connection to api.telegram.org timed out. (connect timeout=20)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193439&timeout=20 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438E8C8490>, 'Connection to api.telegram.org timed out. (connect timeout=20)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 835, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 108, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 507, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193439&timeout=20 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438E8C8490>, 'Connection to api.telegram.org timed out. (connect timeout=20)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 212, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x000002438FC1A010>, 'Connection to api.telegram.org timed out. (connect timeout=15)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/sendMessage?chat_id=715648962&text=%D0%AF+%D1%83%D0%BF%D0%B0%D0%BB%2C+%D0%BF%D0%BE%D0%B4%D0%BD%D0%B8%D0%BC%D0%B8+%D0%BC%D0%B5%D0%BD%D1%8F%21 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438FC1A010>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 772, in fatal_warning
+    self.send_message(ID, "Я упал, подними меня!")
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1549, in send_message
+    apihelper.send_message(
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 264, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 507, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/sendMessage?chat_id=715648962&text=%D0%AF+%D1%83%D0%BF%D0%B0%D0%BB%2C+%D0%BF%D0%BE%D0%B4%D0%BD%D0%B8%D0%BC%D0%B8+%D0%BC%D0%B5%D0%BD%D1%8F%21 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000002438FC1A010>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+
+2023-08-03 01:10:43 WARNING:__main__> restarts left: -1
+2023-08-03 02:15:56 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 02:15:59 INFO:__main__> thread m was started
+2023-08-03 02:15:59 DEBUG:__main__> polling right now
+2023-08-03 02:15:59 INFO:__main__> thread s was started
+2023-08-03 02:16:20 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/type_of_order#791591926
+2023-08-03 02:16:24 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 02:17:01 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/type_of_order#791591926
+2023-08-03 02:17:35 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 02:17:36 INFO:__main__> thread m was started
+2023-08-03 02:17:36 DEBUG:__main__> polling right now
+2023-08-03 02:17:36 INFO:__main__> thread s was started
+2023-08-03 02:17:40 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926
+2023-08-03 02:17:43 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/edit_order#791591926/type_of_order#791591926
+2023-08-03 02:18:27 ERROR:Gbot> display function crushed by: 
+	TeleBot.send_message() missing 1 required positional argument: 'text'
+2023-08-03 02:18:28 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 447, in display
+    self.send_message(tell("type_of_order", lang), reply_markup=menu)
+TypeError: TeleBot.send_message() missing 1 required positional argument: 'text'
+
+2023-08-03 02:19:18 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 02:19:19 INFO:__main__> thread m was started
+2023-08-03 02:19:19 DEBUG:__main__> polling right now
+2023-08-03 02:19:19 INFO:__main__> thread s was started
+2023-08-03 02:19:42 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926
+2023-08-03 02:19:45 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926/type_of_order#791591926
+2023-08-03 02:20:12 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926/type_of_order#791591926/unknw_des
+2023-08-03 02:20:18 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926/type_of_order#791591926
+2023-08-03 02:20:32 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926
+2023-08-03 02:20:37 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926/type_of_order#791591926
+2023-08-03 02:24:52 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 02:24:56 INFO:__main__> thread m was started
+2023-08-03 02:24:56 DEBUG:__main__> polling right now
+2023-08-03 02:24:56 INFO:__main__> thread s was started
+2023-08-03 02:25:09 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926
+2023-08-03 02:25:11 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926/type_of_order#791591926
+2023-08-03 02:26:06 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 02:26:08 INFO:__main__> thread m was started
+2023-08-03 02:26:08 DEBUG:__main__> polling right now
+2023-08-03 02:26:08 INFO:__main__> thread s was started
+2023-08-03 02:26:15 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926
+2023-08-03 02:26:17 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926/type_of_order#791591926
+2023-08-03 02:28:49 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 02:28:55 INFO:__main__> thread m was started
+2023-08-03 02:28:55 DEBUG:__main__> polling right now
+2023-08-03 02:28:55 INFO:__main__> thread s was started
+2023-08-03 02:29:19 DEBUG:base> UPDATE orders WHERE id = 791591926 SET type = arrangement
+2023-08-03 02:29:38 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = edit_order#791591926
+2023-08-03 03:21:00 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:21:02 INFO:__main__> thread m was started
+2023-08-03 03:21:02 DEBUG:__main__> polling right now
+2023-08-03 03:21:02 INFO:__main__> thread s was started
+2023-08-03 03:21:19 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:21:22 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:21:22 ERROR:Gbot> get_orders function crushed by: 
+	TeleBot.send_message() missing 2 required positional arguments: 'chat_id' and 'text'
+2023-08-03 03:21:22 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 666, in get_orders
+    self.send_message(protect_content=True, )
+TypeError: TeleBot.send_message() missing 2 required positional arguments: 'chat_id' and 'text'
+
+2023-08-03 03:21:22 ERROR:Gbot> display function crushed by: 
+	cannot access local variable 'opened' where it is not associated with a value
+2023-08-03 03:21:22 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 481, in display
+    opened= f"{'0'*len(stat_list)}{bin(opened)[2:]}"[-l:]
+                                       ^^^^^^
+UnboundLocalError: cannot access local variable 'opened' where it is not associated with a value
+
+2023-08-03 03:21:46 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:21:47 INFO:__main__> thread m was started
+2023-08-03 03:21:47 DEBUG:__main__> polling right now
+2023-08-03 03:21:47 INFO:__main__> thread s was started
+2023-08-03 03:21:49 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:21:51 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:21:51 ERROR:Gbot> get_orders function crushed by: 
+	TeleBot.send_message() missing 2 required positional arguments: 'chat_id' and 'text'
+2023-08-03 03:21:51 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 666, in get_orders
+    self.send_message(protect_content=True, )
+TypeError: TeleBot.send_message() missing 2 required positional arguments: 'chat_id' and 'text'
+
+2023-08-03 03:21:51 ERROR:Gbot> display function crushed by: 
+	cannot access local variable 'l' where it is not associated with a value
+2023-08-03 03:21:51 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 481, in display
+    opened= f"{'0'*len(stat_list)}{bin(opened_code)[2:]}"[-l:]
+                                                           ^
+UnboundLocalError: cannot access local variable 'l' where it is not associated with a value
+
+2023-08-03 03:22:15 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:22:16 INFO:__main__> thread m was started
+2023-08-03 03:22:16 DEBUG:__main__> polling right now
+2023-08-03 03:22:16 INFO:__main__> thread s was started
+2023-08-03 03:22:19 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:22:20 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:22:20 ERROR:Gbot> get_orders function crushed by: 
+	TeleBot.send_message() missing 2 required positional arguments: 'chat_id' and 'text'
+2023-08-03 03:22:20 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 667, in get_orders
+    self.send_message(protect_content=True, )
+TypeError: TeleBot.send_message() missing 2 required positional arguments: 'chat_id' and 'text'
+
+2023-08-03 03:22:20 ERROR:Gbot> display function crushed by: 
+	'NoneType' object has no attribute 'get'
+2023-08-03 03:22:20 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 484, in display
+    id_list = o_dict.get(stat)
+              ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+2023-08-03 03:22:36 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:22:38 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:23:34 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:23:35 INFO:__main__> thread m was started
+2023-08-03 03:23:35 DEBUG:__main__> polling right now
+2023-08-03 03:23:35 INFO:__main__> thread s was started
+2023-08-03 03:23:37 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:23:39 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:23:41 ERROR:Gbot> get_orders function crushed by: 
+	'recreated'
+2023-08-03 03:23:41 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 670, in get_orders
+    id_dict.update({"created": id_dict.get('created') + id_dict.pop('recreated')})
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'recreated'
+
+2023-08-03 03:23:56 ERROR:Gbot> display function crushed by: 
+	'NoneType' object has no attribute 'get'
+2023-08-03 03:23:56 ERROR:exceptor> Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 484, in display
+    id_list = o_dict.get(stat)
+              ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+2023-08-03 03:23:58 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:24:02 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:25:07 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:25:10 INFO:__main__> thread m was started
+2023-08-03 03:25:10 DEBUG:__main__> polling right now
+2023-08-03 03:25:10 INFO:__main__> thread s was started
+2023-08-03 03:25:16 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:25:17 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:25:48 ERROR:Gbot> get_orders function crushed by: 
+	'completed'
+2023-08-03 03:26:04 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:26:06 INFO:__main__> thread m was started
+2023-08-03 03:26:06 DEBUG:__main__> polling right now
+2023-08-03 03:26:06 INFO:__main__> thread s was started
+2023-08-03 03:26:08 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:26:10 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:26:29 DEBUG:base> failed connection to data attempt: near "SET": syntax error
+2023-08-03 03:26:29 DEBUG:base> failed connection to data attempt: near "SET": syntax error
+2023-08-03 03:26:29 DEBUG:base> failed connection to data attempt: near "SET": syntax error
+2023-08-03 03:26:29 DEBUG:base> failed connection to data attempt: near "SET": syntax error
+2023-08-03 03:26:29 DEBUG:base> failed connection to data attempt: near "SET": syntax error
+2023-08-03 03:26:29 DEBUG:base> failed connection to data attempt: near "SET": syntax error
+2023-08-03 03:26:29 DEBUG:base> failed connection to data attempt: near "SET": syntax error
+2023-08-03 03:26:29 ERROR:base> failed connection to data attempt
+2023-08-03 03:26:32 ERROR:Gbot> get_orders function crushed by: 
+	'NoneType' object has no attribute 'fetchone'
+2023-08-03 03:28:05 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:28:07 INFO:__main__> thread m was started
+2023-08-03 03:28:07 DEBUG:__main__> polling right now
+2023-08-03 03:28:07 INFO:__main__> thread s was started
+2023-08-03 03:28:10 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:28:12 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:30:17 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:30:19 INFO:__main__> thread m was started
+2023-08-03 03:30:19 DEBUG:__main__> polling right now
+2023-08-03 03:30:19 INFO:__main__> thread s was started
+2023-08-03 03:30:40 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:30:41 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:33:13 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:33:15 INFO:__main__> thread m was started
+2023-08-03 03:33:15 DEBUG:__main__> polling right now
+2023-08-03 03:33:15 INFO:__main__> thread s was started
+2023-08-03 03:33:18 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:33:20 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:33:42 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:33:44 INFO:__main__> thread m was started
+2023-08-03 03:33:44 DEBUG:__main__> polling right now
+2023-08-03 03:33:44 INFO:__main__> thread s was started
+2023-08-03 03:35:06 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:35:07 INFO:__main__> thread m was started
+2023-08-03 03:35:07 DEBUG:__main__> polling right now
+2023-08-03 03:35:07 INFO:__main__> thread s was started
+2023-08-03 03:35:09 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:35:13 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:36:21 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:36:23 INFO:__main__> thread m was started
+2023-08-03 03:36:23 DEBUG:__main__> polling right now
+2023-08-03 03:36:23 INFO:__main__> thread s was started
+2023-08-03 03:36:25 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:36:27 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:38:46 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:38:47 INFO:__main__> thread m was started
+2023-08-03 03:38:47 DEBUG:__main__> polling right now
+2023-08-03 03:38:47 INFO:__main__> thread s was started
+2023-08-03 03:39:10 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:39:12 INFO:__main__> thread m was started
+2023-08-03 03:39:12 DEBUG:__main__> polling right now
+2023-08-03 03:39:12 INFO:__main__> thread s was started
+2023-08-03 03:39:49 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:39:50 INFO:__main__> thread m was started
+2023-08-03 03:39:50 DEBUG:__main__> polling right now
+2023-08-03 03:39:50 INFO:__main__> thread s was started
+2023-08-03 03:40:00 ERROR:Gbot> display function crushed by: 
+	list indices must be integers or slices, not str
+2023-08-03 03:40:58 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:41:00 INFO:__main__> thread m was started
+2023-08-03 03:41:00 DEBUG:__main__> polling right now
+2023-08-03 03:41:00 INFO:__main__> thread s was started
+2023-08-03 03:41:12 ERROR:Gbot> display function crushed by: 
+	list indices must be integers or slices, not str
+2023-08-03 03:42:29 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:42:31 INFO:__main__> thread m was started
+2023-08-03 03:42:31 DEBUG:__main__> polling right now
+2023-08-03 03:42:31 INFO:__main__> thread s was started
+2023-08-03 03:45:06 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:45:08 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:45:21 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/unknw_des
+2023-08-03 03:45:25 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:46:04 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:46:06 INFO:__main__> thread m was started
+2023-08-03 03:46:06 DEBUG:__main__> polling right now
+2023-08-03 03:46:06 INFO:__main__> thread s was started
+2023-08-03 03:46:16 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/unknw_des
+2023-08-03 03:46:20 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:46:22 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:46:23 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:46:27 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/unknw_des
+2023-08-03 03:46:28 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:46:50 INFO:__main__> a.2.0bmr98============ session started =======================
+2023-08-03 03:46:51 INFO:__main__> thread m was started
+2023-08-03 03:46:51 DEBUG:__main__> polling right now
+2023-08-03 03:46:51 INFO:__main__> thread s was started
+2023-08-03 03:46:55 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/edit_order#791591926
+2023-08-03 03:47:00 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:47:17 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu
+2023-08-03 03:47:32 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:47:44 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/edit_order#791591926
+2023-08-03 03:47:48 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:47:52 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/show_order#893510985
+2023-08-03 03:47:55 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders
+2023-08-03 03:47:58 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/edit_order#158283068
+2023-08-03 03:48:02 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/edit_order#158283068/edit_deadline_menu#158283068
+2023-08-03 03:48:02 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/edit_order#158283068/edit_deadline_menu#158283068#715648962#5467
+2023-08-03 03:50:31 DEBUG:base> UPDATE orders WHERE id = 158283068 SET deadline = 2023-09-03 11:46:99
+2023-08-03 03:50:31 DEBUG:base> UPDATE profiles WHERE id = 715648962 SET nav = main_menu/my_orders/edit_order#158283068/edit_deadline_menu#158283068#715648962#5468
+2023-08-03 23:26:19 ERROR:__main__> bot polling will stoped by Fatal Error: 
+	HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193560&timeout=20 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408CC73910>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+2023-08-03 23:26:19 ERROR:exceptor> Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x000002408CC73910>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193560&timeout=20 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408CC73910>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 845, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 108, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193560&timeout=20 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408CC73910>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+
+2023-08-03 23:26:19 WARNING:__main__> need a restart
+2023-08-03 23:26:20 ERROR:Gbot> fatal_warning function crushed by: 
+	HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/sendMessage?chat_id=715648962&text=%D0%AF+%D1%83%D0%BF%D0%B0%D0%BB%2C+%D0%BF%D0%BE%D0%B4%D0%BD%D0%B8%D0%BC%D0%B8+%D0%BC%D0%B5%D0%BD%D1%8F%21 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408C68CF50>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+2023-08-03 23:26:20 ERROR:exceptor> Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x000002408CC73910>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193560&timeout=20 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408CC73910>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\main.py", line 845, in __main
+    bot.polling(none_stop=True, interval=0)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 108, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/getUpdates?offset=446193560&timeout=20 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408CC73910>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x000002408C68CF50>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/sendMessage?chat_id=715648962&text=%D0%AF+%D1%83%D0%BF%D0%B0%D0%BB%2C+%D0%BF%D0%BE%D0%B4%D0%BD%D0%B8%D0%BC%D0%B8+%D0%BC%D0%B5%D0%BD%D1%8F%21 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408C68CF50>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\exceptor.py", line 17, in protected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Redmi\Desktop\Projects\GeorgeBot\Gbot.py", line 823, in fatal_warning
+    self.send_message(ID, "Я упал, подними меня!")
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 1549, in send_message
+    apihelper.send_message(
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 264, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Redmi\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0/sendMessage?chat_id=715648962&text=%D0%AF+%D1%83%D0%BF%D0%B0%D0%BB%2C+%D0%BF%D0%BE%D0%B4%D0%BD%D0%B8%D0%BC%D0%B8+%D0%BC%D0%B5%D0%BD%D1%8F%21 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002408C68CF50>: Failed to resolve 'api.telegram.org' ([Errno 11001] getaddrinfo failed)"))
+
+2023-08-03 23:26:20 WARNING:__main__> restarts left: -1
