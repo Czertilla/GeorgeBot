@@ -362,6 +362,9 @@ class GeorgeBot(telebot.TeleBot):
                 menu.add(self.display(user, 'back'))
                 menu.add(self.display(user, 'back_to_home'))
                 self.send_message(ID, tell("del_profile_warning", lang, {'id': user['id']}), reply_markup=menu, parse_mode="HTML")
+            case "confirm_del_order":
+                
+                pass
             case "edit_deadline_menu":
                 deadline_text = order.get('deadline')
                 deadline_form = re.sub(r'.99', '', deadline_text)
@@ -412,6 +415,8 @@ class GeorgeBot(telebot.TeleBot):
                 curr_dl = order['deadline']
                 if curr_dl == '~':
                     curr_dl = tell("None")
+                if order.get('satus') in ('created', 'recreated'):
+                    menu.add(button(tell('delete_order_draft', lang), callback_data=f"del order {order_id}"))
                 menu.add(button(tell("deadline_of_order", lang, {'curr': curr_dl}),
                                 callback_data=f"to deadline#{order_id}"))
                 prev = order['prev']
@@ -565,6 +570,11 @@ class GeorgeBot(telebot.TeleBot):
                                                           lang, 
                                                           ignore_all_insets=True)}), 
                                   reply_markup=menu)
+            case "too_many_orders":
+                menu.add(self.display(user, "back"))
+                menu.add(self.display(user, "back_to_home"))
+                self.send_message(ID, text = tell("too_many_orders", lang), reply_markup=menu)
+                pass
             case "view_file":
                 f_id, loc = user.get('f_id'), user.get('f_loc')
                 folder:dict = order.get(loc)
@@ -856,7 +866,7 @@ class GeorgeBot(telebot.TeleBot):
         order_id = self.orders_data.new_order(user)
         match user['status']:
             case 'banned':
-                self.display(user, "banned")
+                return "banned"
             case 'newcomer':
                 request = {'status': 'simple'}
                 self.users_data.update_profile(ID, request)

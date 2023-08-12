@@ -497,7 +497,15 @@ class Orders(MetaBase.BasicBase, metaclass=MetaBase):
         result = self.execute(f"SELECT {column} FROM {self.tname} WHERE {self._rowid}=?", (ID, ))
         return result.fetchone()[0]
 
+    def orders_limit(self, user_id) -> bool:
+        id_list = self.execute(
+            f"SELECT id FROM {self.tname} WHERE customer = ? AND NOT status = 'closed' AND NOT status = 'comleted'",
+            (user_id,))
+        return len(id_list.fetchall()) >= 10
+
     def new_order(self, user:dict) -> int:
+        if self.orders_limit(user.get('id')):
+            return 'too many'
         ID = random.randint(100000000, 999999999)
         while self.verify(ID):
             ID = random.randint(100000000, 999999999)
