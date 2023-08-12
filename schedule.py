@@ -3,7 +3,7 @@ import threading
 import datetime
 import clock
 import logging
-from Gbot import GeorgeBot
+from Gbot import body
 import json
 import exceptor
 
@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 exc = exceptor.Exceptor()
 
 class Scheduler:
-    def __init__(self, bot:GeorgeBot) -> None:
+    def __init__(self, bot:body) -> None:
         self.lock = False
         self.closing = False
         self.timetable:Events = Events()
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     with open("bot_presets.json", 'rb') as f:
         token = json.load(f).get('token')
     from base import Profiles, Orders
-    bot = GeorgeBot(token, Profiles(), Orders())
+    bot = body(token, Profiles(), Orders())
     timetable = Scheduler(bot)
     timetable.schedule()
     event = {'code': "test", 'time': "2023-07-24 20:15:23"}

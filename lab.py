@@ -1,3 +1,7 @@
+a = {'a': 1}
+a.keys()
+
+
 import sqlite3
 from exceptor import Exceptor
 import json
@@ -6,8 +10,8 @@ import logging
 """27.6.2023 7:36:42"""
 import time
 from set_logging import LOGGING
-from Gbot import GeorgeBot
-import base
+from Gbot import body
+import base as base
 import clock
 import datetime
 import re
@@ -17,6 +21,11 @@ import re
 # files = Base('f')
 # events = Base('e')
 
+class A()
+    ...
+
+class B(A):
+    ...
 import logging
 # from tqdm import trange
 # from tqdm.contrib.logging import logging_redirect_tqdm
@@ -34,22 +43,9 @@ import logging
 # logging.basicConfig(level=logging.INFO,
 #                     format='(%(threadName)-10s) %(message)s',
 #                     )
-import logging.config
-users = base.Profiles
-orders = base.Orders
 # bot = GeorgeBot("5990727623:AAHbJxQ-dnVZoZ4lmm9bxXXPlwQIbVtIKW0", users, orders)
 
-d = {'a':0}
 
-def p():
-    a=d.get('a')
-    a+= 1
-    d.update({'a': a})
-x = threading.Thread(target=p)
-y = threading.Thread(target=p)
-x.start()
-y.start()
-print(d)
 # def daemon():
 #     logging.debug('Starting')
 #     time.sleep(2)

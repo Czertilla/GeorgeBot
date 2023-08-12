@@ -1,4 +1,4 @@
-from Gbot import GeorgeBot
+from Gbot import body
 from base import Profiles, Orders, getBase
 import telebot
 import threading
@@ -38,7 +38,7 @@ class Admin:
         self.exceptor = Exceptor()
         self.users_data:Profiles = getBase("Profiles")
         self.orders_data:Orders = getBase("Orders")
-        self.bot = GeorgeBot(getattr(self, "token", ''), self.users_data, self.orders_data)
+        self.bot = body(getattr(self, "token", ''), self.users_data, self.orders_data)
         self.scheduler = Scheduler(self.bot)
         self.thr_presets = {
             'm': {'target': self.__main, 'args': (self.bot, self.users_data, self.orders_data)},
@@ -315,7 +315,7 @@ update_presets - update (create if not exist) bot_presets.json
         scheduler = getattr(self, 'scheduler', Scheduler(self.bot))
         scheduler.schedule()
 
-    def __main(self, bot: GeorgeBot, users_data: Profiles, orders_data: Orders):
+    def __main(self, bot: body, users_data: Profiles, orders_data: Orders):
         @bot.message_handler(commands=["start"])
         def start(message: telebot.types.Message):
             user = message.from_user

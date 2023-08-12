@@ -11,40 +11,13 @@ from exceptor import Exceptor
 
 logger = logging.getLogger(__name__)
 exc = Exceptor()
-
-class DataDict(dict):
-    def __init__(self,name,columns, *args, **kwargs):
-        self.name = name
-        self.date = clock.now()
-        self.columns = columns
-        self.set_width()
-        dict.__init__(self, *args, **kwargs)
-    def set_width(self):
-        self.row_width = max(len(max(self.columns, key=lambda x: len(x))) + 2, 77/len(self.columns))
-    def __add__(self, other):
-        dict.update(self, other)
-        return self
-    def add(self, D:dict):
-        self.update(D)
-    def update(self, D:dict):
-        dict.update(self, {D.pop('id'): D})
-    def __str__(self):
-        result = f"@{self.name:20s} %{self.date}\n"
-        for key in self.columns:
-            result += f"{key:{self.row_width}}"
-        result += f'\n{"="*self.row_width*len(self.columns)}\n'
-        for key, record in self.items():
-            result += f"{str(key):{self.row_width}.{self.row_width}}"
-            for col in self.columns[1:]:
-                result += f"{str(record.get(col)):{self.row_width}.{self.row_width}}"
-            result += f'\n{"_"*self.row_width*len(self.columns)}\n'
-        return result
+from base.datadict import DataDict
 
 class MetaBase(type):
     _exception = object()
     _instance_dict = {}
     _anchor_point = "anchor"
-    _base_path = "db/"
+    _base_path = "..db/"
     _base_name = "data"
     _base_extension = "db"
     def __new__(cls, name, bases, attrs:dict={}):
@@ -346,211 +319,17 @@ class MetaBase(type):
                 return
             logger.debug(f"UPDATE {self.tname} WHERE id = {ID} SET {col} = {value}")
             self.execute(f"UPDATE {self.tname} SET {col} =? WHERE id =?", (value, ID))
-"""
-Custom classes ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-"""
-class Profiles(MetaBase.BasicBase, metaclass=MetaBase):
-    def sign_in(self, user):
-        if self.verify(user.id):
-            self.update_profile(user.id, {'user': user, 'nav': 'main_menu'})
-            return phrases.tell('welcome_back', user.language_code, {'name': user.first_name})
-        else:
-            self.new_profile(user)
-            return phrases.tell('welcome', user.language_code, {'name': user.first_name})
 
-    def new_profile(self, user):
-        data = {col: getattr(user, col, self.get_default(col)) for col in self.columns}
-        if data.get('id') == 715648962:
-            data.update({'status': "god"})
-        data.update({"registered": clock.now()})
-        logger.info(f"new profile, id={user.id}")
-        self.insert(data)
-     
-    def update_profile(self, ID, request=dict):
-        self.update(ID, request)
-        reputation = self.fetch(ID).get('reputation')
-        status = self.fetch(ID).get('status', 'unknow')
-        if reputation < 0 and status != 'banned':
-            self.update(ID, {'status': 'banned'})
-        
-    def discard_profile(self, ID):
-        if ID == 715648962:
-            return "БОГ БЕССМЕРТЕН"
-        self.delete(ID)
+from base.profiles import Profiles
 
+from base.files import Files
 
-class Files(MetaBase.BasicBase,metaclass=MetaBase):
-    def __init__(self):
-        super().__init__()
-        self._anchor_point = "folder"
+from base.events import Events
 
-    def download_file(self, file:dict) -> str:
-        folder = self.hoist(file.get('folder'))
-        info:dict
-        for rowid, info in folder.items():
-            if info.get('name') == file.get('name'):
-                self.update_file(ID:=rowid, file)
-                break
-        else:
-            ID = self.new_file(file)
-        return ID
-    
-    def upload_file(self, ID) -> bytes:
-        file = getBase("Bytedata").fetch(ID)
-        return bz2.decompress(file.get("bytes", b''))
-    
-    def update_file(self, ID, request=dict):
-        for col, val in request.items():
-            if col not in self.columns:
-                continue
-            if col == "bytes":
-                val = bz2.compress(val)
-                getBase("Bytedata").update(ID, {"bytes": val})
-            self.execute(f"UPDATE files SET {col} =? WHERE id =?", (val, ID))
-    
-    def new_file(self, file: dict):
-        file_bytes = bz2.compress(file.pop('bytes'))
-        ID = self.gen_id()
-        file.update({"id": ID})
-        self.insert(file)
-        getBase("Bytedata").insert({"id": ID, 'bytes': file_bytes})
-        return ID
+from base.orders import Orders
 
+from base.logs import Logs
 
-class Events(MetaBase.BasicBase, metaclass=MetaBase):       
-    def new_event(self, event:dict):
-        ID = self.gen_id()
-        regularity = self.convert(event.get('regularity'))
-        exceptions = self.convert(event.get('exceptions'))
-        event.update({"id": ID,"regularity":regularity,'exceptions':exceptions})
-        self.insert(event)
-        return ID 
-    
-    def convert(self, obj):
-        match type(obj).__name__:
-            case 'dict':
-                regularity = clock.timedelta(**obj).total_seconds()
-                return clock.try_int(regularity)
-            case 'int':
-                return (regularity:=obj)
-            case 'list':
-                exceptions = '/'.join(obj)
-                return exceptions
-            case 'str':
-                return (exceptions:=obj)
-            case _:
-                return obj
-    
-    def fetch(self, ID):
-        result = super().fetch(ID)
-        for key, val in result.copy().items():
-            if val is None:
-                result.pop(key)
-        exceptions:str = result.get('exceptions', '')
-        result.update({"exceptions": exceptions.split('/')})
-        return result
-    
-    def update_event(self, ID, request:dict, /, autoencode:bool=True):
-        for key, val in request.items():
-            match key:
-                case 'event':
-                    ID = self.new_event(val)
-                    return ID
-                case 'regularity'|'exceptions':
-                    self._update(ID, key, self.convert(val))
-                case _:
-                    if key not in self.columns:
-                        continue
-                    self._update(ID, key, val)
-        return ID
-
-
-class Logs(MetaBase.BasicBase, metaclass=MetaBase):
-    def new_log(self, anchor, log, date)->None:
-        ID = self.gen_id()
-        request = {'id': ID,
-                    'time': date,
-                    'log': log,
-                    'anchor': anchor}
-        self.insert(request)
-
-
-class Orders(MetaBase.BasicBase, metaclass=MetaBase):
-    def __init__(self)->None:
-        super().__init__()
-        self.status_list = ['created', 
-                            'distributed', 
-                            'proposed',
-                            'accepted',
-                            # 'unpaid',
-                            # 'paid',
-                            'completed',
-                            'recreated',
-                            'closed']
-        self._set_anchor("reference", "Files")
-        self._set_anchor("_logging", "Logs")
-        # self._set_anchor("product", "Files")
-    
-    def peek(self, ID, column):
-        if column not in self.columns:
-            return
-        result = self.execute(f"SELECT {column} FROM {self.tname} WHERE {self._rowid}=?", (ID, ))
-        return result.fetchone()[0]
-
-    def orders_limit(self, user_id) -> bool:
-        id_list = self.execute(
-            f"SELECT id FROM {self.tname} WHERE customer = ? AND NOT status = 'closed' AND NOT status = 'comleted'",
-            (user_id,))
-        return len(id_list.fetchall()) >= 10
-
-    def new_order(self, user:dict) -> int:
-        if self.orders_limit(user.get('id')):
-            return 'too many'
-        ID = random.randint(100000000, 999999999)
-        while self.verify(ID):
-            ID = random.randint(100000000, 999999999)
-        customer = user.get('id')
-        data = {"_status_updated":(now:=clock.now()), 
-                     'id': ID, 
-                     'customer': customer,
-                     'reference':f"{ID}/reference",
-                     'product':f'{ID}/product', '_logging': f'{ID}/logging'}
-        logger.debug(f"INSERT INTO orders new_order with id = {ID}")
-        self.insert(data)
-        self._update_order_status(ID, "created", date=now)
-        return ID
-    
-    def update_order(self, ID, request=dict, hide_logs:bool=False, autoencode:bool=True):
-        reference = request.pop('reference', None)
-        product = request.pop('product', None)
-        status = request.pop('status', None)
-        if status:
-            self._update_order_status(ID, status)
-        self.update(ID, request)
-
-    def delete(self, ID:int) -> bool:
-        subtable:Files = getBase('Files')
-        id_list = subtable.search(f"{ID}/", 
-                                  sample=('folder',), 
-                                  only_whole=False).get('part')['']
-        for f_id in id_list:
-            subtable.delete(f_id)
-        return super().delete(ID)
-
-    def _update_order_status(self, ID, new_status, /, date=None) -> None:
-        order = self.fetch(ID)
-        status = order.get('status')
-        if status in {'outdated', 'closed'}:
-            logger.warning(f"order #{ID} was {status}, trying update status to {new_status}")
-            return
-        subtable:Logs = Logs()
-        if date is None:
-            status_updated = clock.now()
-        else:
-            status_updated = date
-        subtable.new_log(f"{ID}/logging", new_status, status_updated)
-        request = {"status": new_status, "_status_updated": status_updated}
-        self.update(ID, request)
 
 def getBase(name, *args, **kwargs)->MetaBase.BasicBase|Profiles|Files|Orders|Events|Logs:
     match name:
