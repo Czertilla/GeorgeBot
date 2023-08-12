@@ -397,6 +397,7 @@ update_presets - update (create if not exist) bot_presets.json
             try:
                 bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
             except:
+                exc.tracebacking()
                 pass
             path_end = call.data[3:].split('#')
             destination = path_end[0]
@@ -632,6 +633,14 @@ update_presets - update (create if not exist) bot_presets.json
                     call.data = bot.display(user, "back").callback_data
                     if data[1] == 'file':
                         navigation(call)
+                case 'order':
+                    order_id = data[2]
+                    if data[-1] != order_id:
+                        orders_data.delete(int(order_id))
+                        call.data = bot.display(user, "back").callback_data
+                        navigation(call)
+                    else:
+                        bot.display(user, "confirm_del_order")
                 case "sr":  
                     nav = user.get('nav')
                     order_id = nav.split('/')[-1].split('#')[1]
@@ -656,8 +665,6 @@ update_presets - update (create if not exist) bot_presets.json
                     nav = f"confirm_del_file#{order_id}#{'reference'}{msg_list}#{callback_list}"
                     bot.set_nav(nav, user, type(call))
                     bot.display(user, "confirm_del_files")
-                                
-                    
                 case _:
                     err = True
                     unknow_destination(call)
@@ -734,9 +741,18 @@ update_presets - update (create if not exist) bot_presets.json
         def new_order(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
             user = kwargs.get('user', bot.get_user(message))
             order_id = bot.new_order(user)
-            user = bot.set_nav(f"edit_order#{order_id}", user, type(message))
-            bot.display(user, "edit_order_menu")
-        
+            match order_id:
+                case "too many":
+                    user = bot.set_nav("too_many", user, type(message))
+                    code = "too_many_orders"
+                case "banned":
+                    user = bot.set_nav("banned", user, type(message))
+                    code = "banned"
+                case _:
+                    user = bot.set_nav(f"edit_order#{order_id}", user, type(message))
+                    code = "edit_order_menu"
+            bot.display(user, code)
+
         @bot.message_handler(commands=['edit'])
         @bot.access(page_type='edit_order')
         def edit_order(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):
