@@ -1,5 +1,6 @@
-from Gbot import body
+from Gbot import GeorgeBot
 from base import Profiles, Orders, getBase
+from constants import *
 import telebot
 import threading
 import sys
@@ -19,10 +20,6 @@ import json
 closed = False
 problems = {}
 prob_count = 0
-CONTENT_TYPES = ["text", "audio", "document", "photo", "sticker", "video", "video_note", "voice", "location", "contact",
-                 "new_chat_members", "left_chat_member", "new_chat_title", "new_chat_photo", "delete_chat_photo",
-                 "group_chat_created", "supergroup_chat_created", "channel_chat_created", "migrate_to_chat_id",
-                 "migrate_from_chat_id", "pinned_message"]
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +35,7 @@ class Admin:
         self.exceptor = Exceptor()
         self.users_data:Profiles = getBase("Profiles")
         self.orders_data:Orders = getBase("Orders")
-        self.bot = body(getattr(self, "token", ''), self.users_data, self.orders_data)
+        self.bot = GeorgeBot(getattr(self, "token", ''), self.users_data, self.orders_data)
         self.scheduler = Scheduler(self.bot)
         self.thr_presets = {
             'm': {'target': self.__main, 'args': (self.bot, self.users_data, self.orders_data)},
@@ -274,7 +271,6 @@ update_presets - update (create if not exist) bot_presets.json
         self.scheduler.new_event({"code":f"unban.{ID}", "time":term})
         self.bot.ban(ID, term, reason)
 
-
     @exc.protect
     def _command_exec(self, command) -> True:
         request = command.split()
@@ -315,13 +311,14 @@ update_presets - update (create if not exist) bot_presets.json
         scheduler = getattr(self, 'scheduler', Scheduler(self.bot))
         scheduler.schedule()
 
-    def __main(self, bot: body, users_data: Profiles, orders_data: Orders):
+    def __main(self, bot: GeorgeBot, users_data: Profiles, orders_data: Orders):
         @bot.message_handler(commands=["start"])
         def start(message: telebot.types.Message):
             user = message.from_user
             text = users_data.sign_in(user)
             bot.send_message(user.id, text)
-        
+
+
         @bot.message_handler(commands=['ban'])
         @bot.access(8)
         def ban(message: telebot.types.Message|telebot.types.CallbackQuery, **kwargs):

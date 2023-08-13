@@ -9,15 +9,17 @@ import uuid
 import bz2
 from exceptor import Exceptor
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__package__)
 exc = Exceptor()
+
 from base.datadict import DataDict
+
 
 class MetaBase(type):
     _exception = object()
     _instance_dict = {}
     _anchor_point = "anchor"
-    _base_path = "..db/"
+    _base_path = '\\'.join(__file__.split('\\')[:-2]+['db'])+'\\'
     _base_name = "data"
     _base_extension = "db"
     def __new__(cls, name, bases, attrs:dict={}):

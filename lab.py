@@ -1,7 +1,4 @@
-a = {'a': 1}
-a.keys()
-
-
+a = __file__.split('\\')
 import sqlite3
 from exceptor import Exceptor
 import json
@@ -21,11 +18,7 @@ import re
 # files = Base('f')
 # events = Base('e')
 
-class A()
-    ...
 
-class B(A):
-    ...
 import logging
 # from tqdm import trange
 # from tqdm.contrib.logging import logging_redirect_tqdm

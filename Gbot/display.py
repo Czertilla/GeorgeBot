@@ -1,4 +1,4 @@
-from .Gbot import *
+from .Gbot import telebot, GeorgeBot, tell, clock, exc, re, language_codes
 
 class DisplayMixin:
     @exc.protect
