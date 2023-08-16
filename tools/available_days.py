@@ -1,6 +1,6 @@
 import logging
-import clock
-from last_mday import get_last_mday
+import tools.clock as clock
+from tools.last_mday import get_last_mday
 import datetime
 
 

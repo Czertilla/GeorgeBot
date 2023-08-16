@@ -6,10 +6,10 @@ import threading
 import logging
 """27.6.2023 7:36:42"""
 import time
-from set_logging import LOGGING
+from tools.set_logging import LOGGING
 from Gbot import body
 import base as base
-import clock
+import tools.clock as clock
 import datetime
 import re
 "Запись. аранжировка. сведение. трек под ключ. копия минуса. Особое"

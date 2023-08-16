@@ -2,7 +2,7 @@ import logging
 import re
 import sqlite3
 import os
-import clock
+import tools.clock as clock
 import phrases
 import random
 import uuid

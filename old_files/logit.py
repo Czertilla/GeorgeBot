@@ -1,4 +1,4 @@
-from clock import now
+from tools.clock import now
 import logging
 
 logger = logging.getLogger(__name__)

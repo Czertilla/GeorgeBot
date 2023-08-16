@@ -36,6 +36,11 @@ LOGGING = {
             "level": "DEBUG",
             "propagate": True,
         },
+        "admin": {
+            "handlers": ["filelog"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
         "exceptor": {
             "handlers": ["filelog"],
             "level": "ERROR",

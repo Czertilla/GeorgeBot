@@ -5,8 +5,8 @@ from base import getBase, Profiles, Orders, Files
 from exceptor import Exceptor
 from phrases import tell
 from phrases import language_codes
-from try_int import try_int
-import clock
+from tools.try_int import try_int
+import tools.clock as clock
 import json
 import re
 

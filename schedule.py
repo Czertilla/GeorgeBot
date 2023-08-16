@@ -1,7 +1,7 @@
 from base import Events
 import threading
 import datetime
-import clock
+import tools.clock as clock
 import logging
 from Gbot import GeorgeBot
 import json
